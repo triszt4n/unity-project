@@ -11,7 +11,7 @@
 Játékunk a [Geometry Wars 2](https://www.youtube.com/watch?v=1E5b_wbspaQ) című játék klónja lesz - bő egyszerűsítésekkel. A lényeg a játékmenet működéséről:
 
 - A játék során a játékos egy **űrhajót** irányít, amelyet egy nagyobb 2D-s térben képes irányítani.
-- Az űrhajót támadják ellenséges egyszerű geometriai alakzatokra hajazó **ellenséges egységek (űrlények)**, amik különbözőféleképp tudnak mozogni és veszélyt jelenteni.
+- Az űrhajót támadják **ellenséges egységek (űrlények)**, amik különbözőféleképp tudnak mozogni és veszélyt jelenteni.
 - Azonban a játékmenetet különöző **boostok** is segítik.
 - A játékos az űrhajójával képes az ellenséges egységeket **lőni**, az ellenséges egységek eliminálásával gyűjt pontot magának a játékos.
 - A pontok gyűjtése a fő cél. A játékmenet nehézsége az által nő (ellenséges egységek generálásának megsűrűsödése, új egységtípus megjelenése stb.), hogy hány pontot gyűjtött már a játékmenet során, így lépkedve szintről szintre.
@@ -37,11 +37,11 @@ Az időhöz kötött boostok egy 2 elemű FIFO-ban helyezkednek el, ami azt jele
 
 #### Alkalmi boostok
 
-- OneTimeBoost #0: Kapu, amin ha átmegy, felrobbannak a körülütte lévő enemyk
+- OneTimeBoost #0: Kapu, amin ha átmegy az űrhajód, felrobbannak a körülütte lévő ellenségek (pontot kapsz minden eliminált ellenségért)
 - OneTimeBoost #1: +1 élet
 
 #### Átmeneti boostok
 
-- TemporaryBoost #0: mögötted 1s késlekedéssel követ és utánoz
-- TemporaryBoost #1: pajzsot kapsz, sokáig halhatatlan
-- TemporaryBoost #2: amihez hozzáérsz, meghal, pajzsot kapsz, és gyors vagy
+- TemporaryBoost #0: generálódik mögötted egy holografikus másolat az űrhajódról, ami követ és utánozza, amit csinálsz, csupán 1s késleltetéssel mindezt.
+- TemporaryBoost #1: pajzsot kapsz, bizonyos ideig sérthetetlen maradsz
+- TemporaryBoost #2: amihez hozzáérsz, meghal, de egyben pajzsot is kapsz, és gyorsabbá válsz
