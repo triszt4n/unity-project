@@ -15,3 +15,7 @@ Collaborators: @vercibar, @poiuztrewq1, @tetsuchii and @triszt4n.
 
 1. Make sure, you have the Unity version 2020.3.19f1 installed.
 2. Projects > Add > choose the root directory of this project
+
+## Production
+
+Deployment script and Github Actions acquired by @poiuztrewq1 from [this post](https://refactoring.ninja/posts/2021-07-15-publishing-a-unity-webgl-game-from-scratch-in-under-30-minutes/#create-unity-project).
