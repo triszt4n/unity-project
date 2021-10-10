@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - "Docs/**"
+      - "**/**.md"
+      - ".github/**"
+      - ".gitignore"
+      - ".idea/**"
 
 jobs:
   build:
