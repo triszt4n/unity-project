@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - "Docs/**"
+      - "**/**.md"
+      - ".github/**"
+      - ".gitignore"
+      - ".idea/**"
 
 jobs:
   build:
@@ -18,7 +24,7 @@ jobs:
       - name: Cache Library
         uses: actions/cache@v2
         with:
-          path: UnityWebGLDeploy/Library
+          path: Library
           key: Library-${{ github.sha }}
           restore-keys: Library-
 
@@ -28,6 +34,7 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           targetPlatform: WebGL
+          versioning: Semantic
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.3
