@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float rotationSpeed = 360;
     public float acceleration = 100;
+    public GameObject bulletPrefab;
 
     private Rigidbody2D playerRB;
 
@@ -23,5 +24,15 @@ public class PlayerController : MonoBehaviour
 
         transform.Rotate(-Vector3.forward, rotationSpeed * horizontalInput * Time.deltaTime);
         playerRB.AddForce(transform.up * acceleration * verticalInput * Time.deltaTime);
+        
+        if(Input.GetKeyDown(KeyCode.Space)) Shoot();
+    }
+
+
+
+    private void Shoot()
+    {
+        var pos = transform.position + new Vector3(0,0,0.1f);
+        Instantiate(bulletPrefab, pos, transform.rotation);
     }
 }
