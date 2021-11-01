@@ -55,6 +55,9 @@ ExportedObj/
 # Unity3D generated file on crash reports
 sysinfo.txt
 
+#idea
+.idea/*
+
 # Builds
 *.apk
 *.aab
