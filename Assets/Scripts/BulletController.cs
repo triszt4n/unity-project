@@ -15,9 +15,9 @@ public class BulletController : MonoBehaviour
     }
     
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        transform.Translate(Vector3.up * speed * Time.fixedDeltaTime);
+        transform.Translate(Vector3.up * speed * Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
