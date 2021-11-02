@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Rigidbody2D playerRb;
-    public Camera camera;
+    private Rigidbody2D playerRb;
+    public Camera mainCamera;
     public Transform rightFirePoint;
     public Transform leftFirePoint;
     public GameObject bulletPrefab;
@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 movement;
     private Vector2 mousePos;
     
-    private float moveSpeed = 10f;
+    public float moveSpeed = 10f;
 
     // Update is called once per frame
     void Update()
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         movement.x = Input.GetAxis("Horizontal");
         movement.y = Input.GetAxis("Vertical");
 
-        mousePos = camera.ScreenToWorldPoint(Input.mousePosition);
+        mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         
         if (Input.GetKeyDown(KeyCode.Mouse0)) 
             Shoot();
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     void Shoot()
     {
         var liftVector = new Vector3(0, 0, 0.1f);
-        GameObject leftBullet = Instantiate(bulletPrefab, leftFirePoint.position + liftVector, leftFirePoint.rotation);
-        GameObject rightBullet = Instantiate(bulletPrefab, rightFirePoint.position + liftVector, rightFirePoint.rotation);
+        Instantiate(bulletPrefab, leftFirePoint.position + liftVector, leftFirePoint.rotation);
+        Instantiate(bulletPrefab, rightFirePoint.position + liftVector, rightFirePoint.rotation);
     }
 }

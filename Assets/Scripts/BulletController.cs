@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    private float lifeTime = 5f; // life of bullet in sec
-    private float speed = 20f;
+    public float lifeTime = 5f; // life of bullet in sec
+    public float speed = 20f;
     
     // Start is called before the first frame update
     void Start()

@@ -675,11 +675,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c238201c224e20242a236c91d5925aaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRb: {fileID: 0}
-  camera: {fileID: 2102875609}
+  mainCamera: {fileID: 2102875609}
   rightFirePoint: {fileID: 297968355}
   leftFirePoint: {fileID: 460051559}
   bulletPrefab: {fileID: 2183824875687146267, guid: b8d5a18a673204c46a01dcc0bf500b05, type: 3}
+  moveSpeed: 10
 --- !u!61 &661401322
 BoxCollider2D:
   m_ObjectHideFlags: 0
