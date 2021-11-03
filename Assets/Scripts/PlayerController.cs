@@ -1,38 +1,54 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float rotationSpeed = 360;
-    public float acceleration = 100;
+    private Rigidbody2D playerRb;
+    public Camera mainCamera;
+    public Transform rightFirePoint;
+    public Transform leftFirePoint;
     public GameObject bulletPrefab;
-
-    private Rigidbody2D playerRB;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerRB = gameObject.GetComponent<Rigidbody2D>();
+        playerRb = gameObject.GetComponent<Rigidbody2D>();
     }
+
+    private Vector2 movement;
+    private Vector2 mousePos;
+    
+    public float moveSpeed = 10f;
 
     // Update is called once per frame
     void Update()
     {
-        var horizontalInput = Input.GetAxis("Horizontal");
-        var verticalInput = Input.GetAxis("Vertical");
+        movement.x = Input.GetAxis("Horizontal");
+        movement.y = Input.GetAxis("Vertical");
 
-        transform.Rotate(-Vector3.forward, rotationSpeed * horizontalInput * Time.deltaTime);
-        playerRB.AddForce(transform.up * acceleration * verticalInput * Time.deltaTime);
+        mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         
-        if(Input.GetKeyDown(KeyCode.Space)) Shoot();
+        if (Input.GetKeyDown(KeyCode.Mouse0)) 
+            Shoot();
     }
 
-
-
-    private void Shoot()
+    // src: https://www.youtube.com/watch?v=LNLVOjbrQj4&t=207s
+    private void FixedUpdate()
     {
-        var pos = transform.position + new Vector3(0,0,0.1f);
-        Instantiate(bulletPrefab, pos, transform.rotation);
+        playerRb.MovePosition(playerRb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        
+        // Setting lookDir at mouse
+        Vector2 lookDir = mousePos - playerRb.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
+        playerRb.rotation = angle;
+    }
+    
+    void Shoot()
+    {
+        var liftVector = new Vector3(0, 0, 0.1f);
+        Instantiate(bulletPrefab, leftFirePoint.position + liftVector, leftFirePoint.rotation);
+        Instantiate(bulletPrefab, rightFirePoint.position + liftVector, rightFirePoint.rotation);
     }
 }
