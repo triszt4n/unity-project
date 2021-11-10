@@ -2,7 +2,7 @@
 
 Unity 2D team project aiming to create a 2D game called Entropy Wars.
 
-Collaborators: @vercibar, @poiuztrewq1, @tetsuchii and @triszt4n.
+*Collaborators:* [@poiuztrewq1](https://github.com/poiuztrewq1), [@vercibar](https://github.com/vercibar), [@triszt4n](https://github.com/triszt4n), [@tetsuchii](https://github.com/tetsuchii)
 
 ## Development
 
