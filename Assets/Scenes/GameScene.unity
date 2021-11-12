@@ -680,6 +680,7 @@ MonoBehaviour:
   leftFirePoint: {fileID: 460051559}
   bulletPrefab: {fileID: 2183824875687146267, guid: b8d5a18a673204c46a01dcc0bf500b05, type: 3}
   moveSpeed: 10
+  framesBetweenShots: 100
 --- !u!61 &661401322
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1640,7 +1641,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
