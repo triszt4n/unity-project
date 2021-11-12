@@ -10,11 +10,16 @@ public class PlayerController : MonoBehaviour
     public Transform rightFirePoint;
     public Transform leftFirePoint;
     public GameObject bulletPrefab;
+    public HealthBar hpBar;
 
+    public int maxHealth = 3;
+    public int health = 2;
+    
     // Start is called before the first frame update
     void Start()
     {
         playerRb = gameObject.GetComponent<Rigidbody2D>();
+        UpdateHealthUI();
     }
 
     private Vector2 movement;
@@ -58,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
     private int tempFrameCount = 0;
     
-    void ShootIfStarted()
+    private void ShootIfStarted()
     {
         if (!shootStarted)
             return;
@@ -71,10 +76,15 @@ public class PlayerController : MonoBehaviour
             tempFrameCount = 0;
     }
     
-    void Shoot()
+    private void Shoot()
     {
         var liftVector = new Vector3(0, 0, 0.1f);
         Instantiate(bulletPrefab, leftFirePoint.position + liftVector, leftFirePoint.rotation);
         Instantiate(bulletPrefab, rightFirePoint.position + liftVector, rightFirePoint.rotation);
+    }
+
+    public void UpdateHealthUI()
+    {
+        hpBar.UpdateHealth((float)this.health / this.maxHealth);
     }
 }
