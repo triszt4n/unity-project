@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRb = gameObject.GetComponent<Rigidbody2D>();
-        UpdateHP();
+        UpdateHealthUI();
     }
 
     private Vector2 movement;
@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
         Instantiate(bulletPrefab, rightFirePoint.position + liftVector, rightFirePoint.rotation);
     }
 
-    private void UpdateHP()
+    public void UpdateHealthUI()
     {
         hpBar.UpdateHealth((float)this.health / this.maxHealth);
     }
