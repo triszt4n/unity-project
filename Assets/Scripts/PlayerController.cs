@@ -15,7 +15,9 @@ public class PlayerController : MonoBehaviour
     public int maxHealth = 3;
     public int health = 2;
 
-    private int shields = 0;
+
+    public bool hasShield = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -89,14 +91,4 @@ public class PlayerController : MonoBehaviour
         hpBar.UpdateHealth((float)this.health / this.maxHealth);
     }
     
-    public void AddShield()
-    {
-        shields++;
-    }
-
-    public void RemoveShield()
-    {
-        if(shields > 0)
-            shields--;
-    }
 }

@@ -12,12 +12,12 @@
 
         public void OnAttach(PlayerController player)
         {
-            player.AddShield();
+            player.hasShield = true;
         }
 
         public void OnDetach(PlayerController player)
         {
-            player.RemoveShield();
+            player.hasShield = false;
         }
         
 
