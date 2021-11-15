@@ -19,20 +19,12 @@
         {
             player.RemoveShield();
         }
-
-        public bool Compatible(ITemporaryPowerUp powerUp)
-        {
-            return (!(powerUp is ShieldPowerUpPayload));
-        }
+        
 
         public float Duration()
         {
             return duration;
         }
-
-        public int IconIndex()
-        {
-            return 1;
-        }
+        
     }
 }

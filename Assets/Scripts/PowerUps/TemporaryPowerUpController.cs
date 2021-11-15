@@ -24,13 +24,13 @@ public class TemporaryPowerUpController : MonoBehaviour
     }
     
     public Image[] powerUpIconHolders = new Image[maxPowerUps];
-
-
-    private List<PowerUp> powerUps;
+    private Queue<PowerUp> powerUps;
     private PlayerController player;
+    private bool powerUpActive = false;
+    
     void Start()
     {
-        powerUps = new List<PowerUp>();
+        powerUps = new Queue<PowerUp>();
         player = gameObject.GetComponent<PlayerController>();
         UpdateUI();
     }
@@ -38,11 +38,12 @@ public class TemporaryPowerUpController : MonoBehaviour
 
     private void UpdateUI()
     {
+        var powerUpArray = powerUps.ToArray();
         for (int i = 0; i < maxPowerUps; i++)
         {
-            if (i < powerUps.Count)
+            if (i < powerUpArray.Length)
             {
-                powerUpIconHolders[i].sprite = powerUps[i].icon;
+                powerUpIconHolders[i].sprite = powerUpArray[i].icon;
                 powerUpIconHolders[i].color = Color.white;
             }
             else
@@ -52,34 +53,43 @@ public class TemporaryPowerUpController : MonoBehaviour
             }
         }
     }
-
-
+    
+    
+    
     public bool AddPowerUp(ITemporaryPowerUp payload, Sprite powerUpIcon)
     {
         var powerUp = new PowerUp(payload, powerUpIcon);
         
         //check if powerup can be added
-        if (this.powerUps.Count >= maxPowerUps || !CompatibleWithPowerUps(powerUp)) return false;
+        if (this.powerUps.Count >= maxPowerUps) return false;
+        powerUps.Enqueue(powerUp);
+        UpdateUI();
+        UpdateActivePowerUp();
         
-        // add powerup to list
-        StartCoroutine(ActivateNextPowerUp(powerUp));
         return true;
     }
 
-    private bool CompatibleWithPowerUps(PowerUp powerUp)
+
+    private void UpdateActivePowerUp()
     {
-        return powerUps.TrueForAll(p => p.payload.Compatible(powerUp.payload));
+        if (!powerUpActive && powerUps.Count > 0)
+        {
+            powerUpActive = true;
+            StartCoroutine(ActivateNextPowerUp());
+        }
     }
 
-    private IEnumerator ActivateNextPowerUp(PowerUp powerUp)
+    private IEnumerator ActivateNextPowerUp()
     {
-        powerUps.Add(powerUp);
+        var powerUp = powerUps.Peek();
         UpdateUI();
         powerUp.payload.OnAttach(player);
         yield return new WaitForSeconds(powerUp.payload.Duration());
         powerUp.payload.OnDetach(player);
-        powerUps.Remove(powerUp);
+        powerUps.Dequeue();
         UpdateUI();
+        powerUpActive = false;
+        UpdateActivePowerUp();
     }
 
 }
