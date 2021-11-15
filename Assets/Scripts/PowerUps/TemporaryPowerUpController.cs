@@ -8,15 +8,29 @@ using UnityEngine.UI;
 [RequireComponent(typeof(PlayerController))]
 public class TemporaryPowerUpController : MonoBehaviour
 {
-    public Image[] powerUpIconHolders;
-    public Sprite[] powerUpIcons;
+    
     private const int maxPowerUps = 2;
 
-    private List<ITemporaryPowerUp> powerUps;
+    private struct PowerUp
+    {
+        public ITemporaryPowerUp payload;
+        public Sprite icon;
+
+        public PowerUp(ITemporaryPowerUp payload, Sprite icon)
+        {
+            this.payload = payload;
+            this.icon = icon;
+        }
+    }
+    
+    public Image[] powerUpIconHolders = new Image[maxPowerUps];
+
+
+    private List<PowerUp> powerUps;
     private PlayerController player;
     void Start()
     {
-        powerUps = new List<ITemporaryPowerUp>();
+        powerUps = new List<PowerUp>();
         player = gameObject.GetComponent<PlayerController>();
         UpdateUI();
     }
@@ -28,7 +42,7 @@ public class TemporaryPowerUpController : MonoBehaviour
         {
             if (i < powerUps.Count)
             {
-                powerUpIconHolders[i].sprite = getIcon(powerUps[i].IconIndex());
+                powerUpIconHolders[i].sprite = powerUps[i].icon;
                 powerUpIconHolders[i].color = Color.white;
             }
             else
@@ -40,8 +54,10 @@ public class TemporaryPowerUpController : MonoBehaviour
     }
 
 
-    public bool AddPowerUp(ITemporaryPowerUp powerUp)
+    public bool AddPowerUp(ITemporaryPowerUp payload, Sprite powerUpIcon)
     {
+        var powerUp = new PowerUp(payload, powerUpIcon);
+        
         //check if powerup can be added
         if (this.powerUps.Count >= maxPowerUps || !CompatibleWithPowerUps(powerUp)) return false;
         
@@ -50,26 +66,20 @@ public class TemporaryPowerUpController : MonoBehaviour
         return true;
     }
 
-    private bool CompatibleWithPowerUps(ITemporaryPowerUp powerUp)
+    private bool CompatibleWithPowerUps(PowerUp powerUp)
     {
-        return powerUps.TrueForAll(p => p.Compatible(powerUp));
+        return powerUps.TrueForAll(p => p.payload.Compatible(powerUp.payload));
     }
 
-    private IEnumerator ActivateNextPowerUp(ITemporaryPowerUp powerUp)
+    private IEnumerator ActivateNextPowerUp(PowerUp powerUp)
     {
         powerUps.Add(powerUp);
         UpdateUI();
-        powerUp.OnAttach(player);
-        yield return new WaitForSeconds(powerUp.Duration());
-        powerUp.OnDetach(player);
+        powerUp.payload.OnAttach(player);
+        yield return new WaitForSeconds(powerUp.payload.Duration());
+        powerUp.payload.OnDetach(player);
         powerUps.Remove(powerUp);
         UpdateUI();
     }
 
-    private Sprite getIcon(int index)
-    {
-        if (index >= 0 && index < powerUpIcons.Length)
-            return powerUpIcons[index];
-        else return null;
-    }
 }
