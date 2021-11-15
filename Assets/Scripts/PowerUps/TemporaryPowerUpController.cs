@@ -1,11 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using PowerUps;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerController))]
 public class TemporaryPowerUpController : MonoBehaviour
 {
+    public Image[] powerUpIconHolders;
+    public Sprite[] powerUpIcons;
     private const int maxPowerUps = 2;
     private List<ITemporaryPowerUp> powerUps;
     private PlayerController player;
@@ -15,10 +19,14 @@ public class TemporaryPowerUpController : MonoBehaviour
         player = gameObject.GetComponent<PlayerController>();
     }
 
-    
+
+    private void UpdateUI()
+    {
+        //todo: update ui
+    }
 
 
-    public bool AddPowerUp(ITemporaryPowerUp powerUp)
+    public bool AddPowerUp(ITemporaryPowerUp powerUp, Sprite icon)
     {
         //check if powerup can be added
         if (this.powerUps.Count >= maxPowerUps || !CompatibleWithPowerUps(powerUp)) return false;
@@ -36,7 +44,7 @@ public class TemporaryPowerUpController : MonoBehaviour
     private IEnumerator ActivateNextPowerUp(ITemporaryPowerUp powerUp)
     {
         powerUps.Add(powerUp);
-        powerUp.OnAttach(this.player);
+        powerUp.OnAttach(player);
         yield return new WaitForSeconds(powerUp.Duration());
         powerUp.OnDetach(player);
         powerUps.Remove(powerUp);
