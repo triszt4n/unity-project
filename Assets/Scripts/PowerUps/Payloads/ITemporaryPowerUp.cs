@@ -6,5 +6,7 @@
         void OnDetach(PlayerController player);
         bool Compatible(ITemporaryPowerUp powerUp);
         float Duration();
+
+        int IconIndex();
     }
 }
