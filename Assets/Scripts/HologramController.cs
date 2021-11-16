@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class HologramController : MonoBehaviour
 {
-
     private class PlayerState
     {
         public Vector3 position;
@@ -17,7 +16,7 @@ public class HologramController : MonoBehaviour
             rotation = transform.rotation;
         }
     }
-    
+
     public GameObject player;
     public Transform rightFirePoint;
     public Transform leftFirePoint;
@@ -28,12 +27,13 @@ public class HologramController : MonoBehaviour
     private Queue<PlayerState> playerStates;
 
     private bool isLoading;
+
     // Start is called before the first frame update
     void Start()
     {
         playerStates = new Queue<PlayerState>();
         StartCoroutine(LoadPositions(followTime));
-        InvokeRepeating(nameof(shoot), followTime, shootInterval);
+        InvokeRepeating(nameof(Shoot), followTime, shootInterval);
     }
 
     // Update is called once per frame
@@ -44,13 +44,13 @@ public class HologramController : MonoBehaviour
         if (!isLoading && playerStates.Count > 0)
         {
             var state = playerStates.Dequeue();
-            this.transform.position = state.position;
-            this.transform.rotation = state.rotation;
+            transform.position = state.position;
+            transform.rotation = state.rotation;
         }
     }
 
 
-    private void shoot()
+    private void Shoot()
     {
         var liftVector = new Vector3(0, 0, 0.1f);
         Instantiate(bulletPrefab, leftFirePoint.position + liftVector, leftFirePoint.rotation);
