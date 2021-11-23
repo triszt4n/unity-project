@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4716583111773649013}
   m_Layer: 0
   m_Name: HoloLaser
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

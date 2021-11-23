@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -14,6 +16,7 @@ public class PlayerController : MonoBehaviour
 
     public int maxHealth = 3;
     public int health = 2;
+    public int scoresPerSecond = 10;
 
 
     public bool hasShield = false;
@@ -23,6 +26,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = gameObject.GetComponent<Rigidbody2D>();
         UpdateHealthUI();
+        InvokeRepeating(nameof(AddScoreWhileAlive), 0.0f, 1.0f);
     }
 
     private Vector2 movement;
@@ -51,6 +55,17 @@ public class PlayerController : MonoBehaviour
         }
 
         ShootIfStarted();
+    }
+
+    void AddScoreWhileAlive()
+    {
+        var scoreController = ScoreController.Instance;
+        scoreController.AddScore(scoresPerSecond);
+    }
+
+    void StopAddScore()
+    {
+        CancelInvoke(nameof(AddScoreWhileAlive));
     }
 
     // src: https://www.youtube.com/watch?v=LNLVOjbrQj4&t=207s
