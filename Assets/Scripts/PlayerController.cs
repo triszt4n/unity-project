@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -12,9 +13,11 @@ public class PlayerController : MonoBehaviour
     public Transform leftFirePoint;
     public GameObject bulletPrefab;
     public HealthBar hpBar;
+    public ScoreController scoreController;
 
     public int maxHealth = 3;
     public int health = 2;
+    public int scoresPerSecond = 10;
 
     public bool hasShield = false;
     
@@ -23,6 +26,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = gameObject.GetComponent<Rigidbody2D>();
         UpdateHealthUI();
+        InvokeRepeating(nameof(AddScoreWhileAlive), 0.0f, 1.0f);
     }
 
     private Vector2 movement;
@@ -51,6 +55,16 @@ public class PlayerController : MonoBehaviour
         }
 
         ShootIfStarted();
+    }
+
+    void AddScoreWhileAlive()
+    {
+        scoreController.AddScore(scoresPerSecond);
+    }
+
+    void StopAddScore()
+    {
+        CancelInvoke(nameof(AddScoreWhileAlive));
     }
 
     // src: https://www.youtube.com/watch?v=LNLVOjbrQj4&t=207s
@@ -89,6 +103,17 @@ public class PlayerController : MonoBehaviour
     public void UpdateHealthUI()
     {
         hpBar.UpdateHealth((float)this.health / this.maxHealth);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            // Do die logic if health <= 0
+            health = 0;
+        }
+        UpdateHealthUI();
     }
     
 }
