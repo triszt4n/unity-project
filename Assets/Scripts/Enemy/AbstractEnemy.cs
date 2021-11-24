@@ -33,6 +33,21 @@ namespace Enemy
             lastCollisionWithPlayer = DateTime.Now;
             other.gameObject.GetComponent<PlayerController>().TakeDamage(damagePerSecond);
         }
+
+        public static int EnemyGroupSize (EnemyType enemyType)
+        {
+            switch (enemyType)
+            {
+                case EnemyType.Bumper: return 3;
+                case EnemyType.Dodger: return 4;
+                case EnemyType.Minion: return 5;
+                case EnemyType.Walker: return 3;
+                case EnemyType.Snake: return 2;
+                case EnemyType.Shielded: return 2;
+                case EnemyType.Snitch: return 1;
+                default: return 1;
+            }
+        }
     }
 
     public enum EnemyType
