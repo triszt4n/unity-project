@@ -12,11 +12,6 @@ public class ScoreController : Singleton<ScoreController>
         UpdateUI();
     }
 
-    private void Update()
-    {
-        UpdateUI();
-    }
-
     private void UpdateUI()
     {
         txt.text = CurrentScore.ToString();
@@ -25,10 +20,12 @@ public class ScoreController : Singleton<ScoreController>
     public void AddScore(int amount)
     {
         CurrentScore += amount;
+        UpdateUI();
     }
 
     public void ResetScore()
     {
         CurrentScore = 0;
+        UpdateUI();
     }
 }

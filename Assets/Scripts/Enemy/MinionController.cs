@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using Random = UnityEngine.Random;
 
 namespace Enemy
@@ -15,11 +16,11 @@ namespace Enemy
             base.Start();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             direction = objectToChase.ClosestPoint(EnemyBody.position) - EnemyBody.position;
             EnemyBody.AddForce(
-                direction.normalized * moveSpeed
+                direction.normalized * moveSpeed * Time.fixedDeltaTime
             );
         }
     }
