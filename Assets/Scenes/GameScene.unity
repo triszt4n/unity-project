@@ -1376,8 +1376,11 @@ MonoBehaviour:
   rightFirePoint: {fileID: 297968355}
   leftFirePoint: {fileID: 460051559}
   bulletPrefab: {fileID: 2183824875687146267, guid: b8d5a18a673204c46a01dcc0bf500b05, type: 3}
+  explosionPrefab: {fileID: 516489693114719762, guid: 98d379976d0200247be695a72880e69b, type: 3}
   hpBar: {fileID: 1028114326}
   scoreController: {fileID: 306001009}
+  invulnaribilityMillis: 1500
+  damageExplosionRadius: 10
   maxHealth: 3
   health: 2
   scoresPerSecond: 10

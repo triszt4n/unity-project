@@ -11,8 +11,12 @@ public class PlayerController : MonoBehaviour
     public Transform rightFirePoint;
     public Transform leftFirePoint;
     public GameObject bulletPrefab;
+    public GameObject explosionPrefab;
     public HealthBar hpBar;
     public ScoreController scoreController;
+    public DateTime lastCollision = DateTime.MinValue;
+    public int invulnaribilityMillis = 1500;
+    public float damageExplosionRadius = 40f;
 
     public int maxHealth = 3;
     public int health = 2;
@@ -104,13 +108,23 @@ public class PlayerController : MonoBehaviour
         hpBar.UpdateHealth((float)this.health / this.maxHealth);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage()
     {
-        health -= damage;
+        health -= 1;
+        Instantiate(explosionPrefab, transform.position, explosionPrefab.transform.rotation);
         if (health <= 0)
         {
             // Do die logic if health <= 0
             health = 0;
+        }
+
+        var destroyableColliders = Physics2D.OverlapCircleAll(gameObject.GetComponent<Rigidbody2D>().position, damageExplosionRadius);
+        foreach (var toDestroyCollider in destroyableColliders)
+        {
+            if (toDestroyCollider.gameObject.CompareTag("Enemy"))
+            {
+                Destroy(toDestroyCollider.gameObject);
+            }
         }
         UpdateHealthUI();
     }
