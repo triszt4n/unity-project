@@ -16,6 +16,7 @@ namespace Enemy
         public GameObject player;
         public ScoreController scoreController;
         private DateTime nextEnemySpawnTime = DateTime.Now;
+        public DifficultyController difficultyController;
         
         // Add Group spawning support
         private Dictionary<EnemyType, double> spawnChances = new Dictionary<EnemyType, double>()
@@ -29,9 +30,67 @@ namespace Enemy
         private void Start()
         {
             nextEnemySpawnTime = DateTime.Now + TimeSpan.FromSeconds(2.0f);
+            UpdateSpawnChancesForDifficulty();
         }
 
         private void Update()
+        {
+            UpdateSpawnChancesForDifficulty();
+        }
+
+        private void UpdateSpawnChancesForDifficulty()
+        {
+            switch (difficultyController.GetDifficulty())
+            {
+                case DifficultyController.Difficulty.Easy:
+                {
+                    spawnChances[EnemyType.Snitch] = 0.8;
+                    spawnChances[EnemyType.Minion] = 0.6;
+                    spawnChances[EnemyType.Walker] = 0.2;
+                    spawnChances[EnemyType.Dodger] = 0.01;
+                    spawnChances[EnemyType.Bumper] = 0.8;
+                    break;
+                }
+                case DifficultyController.Difficulty.Normal:
+                {
+                    spawnChances[EnemyType.Snitch] = 0.4;
+                    spawnChances[EnemyType.Minion] = 0.4;
+                    spawnChances[EnemyType.Walker] = 0.4;
+                    spawnChances[EnemyType.Dodger] = 0.05;
+                    spawnChances[EnemyType.Bumper] = 0.5;
+                    break;
+                }
+                case DifficultyController.Difficulty.Hard:
+                {
+                    spawnChances[EnemyType.Snitch] = 0.2;
+                    spawnChances[EnemyType.Minion] = 0.4;
+                    spawnChances[EnemyType.Walker] = 0.4;
+                    spawnChances[EnemyType.Dodger] = 0.2;
+                    spawnChances[EnemyType.Bumper] = 0.2;
+                    break;
+                }
+                case DifficultyController.Difficulty.VeryHard:
+                {
+                    spawnChances[EnemyType.Snitch] = 0.1;
+                    spawnChances[EnemyType.Minion] = 0.8;
+                    spawnChances[EnemyType.Walker] = 0.6;
+                    spawnChances[EnemyType.Dodger] = 0.5;
+                    spawnChances[EnemyType.Bumper] = 0.4;
+                    break;
+                }
+                case DifficultyController.Difficulty.Impossible:
+                {
+                    spawnChances[EnemyType.Snitch] = 0.01;
+                    spawnChances[EnemyType.Minion] = 1;
+                    spawnChances[EnemyType.Walker] = 1;
+                    spawnChances[EnemyType.Dodger] = 1;
+                    spawnChances[EnemyType.Bumper] = 1;
+                    break;
+                }
+            }
+        }
+
+        private void FixedUpdate()
         {
             if (DateTime.Now >= nextEnemySpawnTime)
             {

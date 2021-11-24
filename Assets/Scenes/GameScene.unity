@@ -944,6 +944,7 @@ GameObject:
   - component: {fileID: 306001010}
   - component: {fileID: 306001009}
   - component: {fileID: 306001008}
+  - component: {fileID: 306001011}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -970,6 +971,7 @@ MonoBehaviour:
   dodgerPrefab: {fileID: 5749861561844494755, guid: 7115cded048cbc842a56904743e5f1cc, type: 3}
   player: {fileID: 661401318}
   scoreController: {fileID: 306001009}
+  difficultyController: {fileID: 306001011}
 --- !u!114 &306001009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -997,6 +999,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &306001011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306001007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0762d1efb1bb43a1ac01d6cb09e51f8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreController: {fileID: 306001009}
 --- !u!1 &460051558
 GameObject:
   m_ObjectHideFlags: 0
@@ -1383,7 +1398,7 @@ MonoBehaviour:
   scoresPerSecond: 10
   hasShield: 0
   moveSpeed: 10
-  framesBetweenShots: 30
+  millisBetweenShots: 200
 --- !u!61 &661401322
 BoxCollider2D:
   m_ObjectHideFlags: 0
