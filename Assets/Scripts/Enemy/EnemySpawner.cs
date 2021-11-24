@@ -17,6 +17,7 @@ namespace Enemy
         public ScoreController scoreController;
         private DateTime nextEnemySpawnTime = DateTime.Now;
         public DifficultyController difficultyController;
+        private DifficultyController.Difficulty difficulty;
         
         // Add Group spawning support
         private Dictionary<EnemyType, double> spawnChances = new Dictionary<EnemyType, double>()
@@ -30,6 +31,7 @@ namespace Enemy
         private void Start()
         {
             nextEnemySpawnTime = DateTime.Now + TimeSpan.FromSeconds(2.0f);
+            difficulty = difficultyController.GetDifficulty();
             UpdateSpawnChancesForDifficulty();
         }
 
@@ -40,6 +42,13 @@ namespace Enemy
 
         private void UpdateSpawnChancesForDifficulty()
         {
+            // We don't touch the spawn chances if the difficulty hasn't changed
+            if (difficulty == difficultyController.GetDifficulty())
+            {
+                return;
+            }
+            difficulty = difficultyController.GetDifficulty();
+
             switch (difficultyController.GetDifficulty())
             {
                 case DifficultyController.Difficulty.Easy:
