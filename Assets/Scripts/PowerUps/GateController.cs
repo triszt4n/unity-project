@@ -18,11 +18,20 @@ public class GateController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(!other.gameObject.CompareTag("Player")) return;
-        if (explosionPrefab != null)
-        {
-            Instantiate(explosionPrefab, transform.position, explosionPrefab.transform.rotation);
-        }
-        //todo: destroy enemies in radius
+        Explode(transform.position, radius);
         Destroy(gameObject);
+    }
+
+    private void Explode(Vector2 where, float howBig)
+    {
+        Instantiate(explosionPrefab, where, explosionPrefab.transform.rotation);
+        var destroyableColliders = Physics2D.OverlapCircleAll(where, howBig);
+        foreach (var toDestroyCollider in destroyableColliders)
+        {
+            if (toDestroyCollider.gameObject.CompareTag("Enemy"))
+            {
+                Destroy(toDestroyCollider.gameObject);
+            }
+        }
     }
 }

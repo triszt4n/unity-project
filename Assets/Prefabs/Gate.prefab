@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 516489693114719762, guid: 98d379976d0200247be695a72880e69b, type: 3}
-  radius: 5
+  radius: 10
   rotationSpeed: 30
 --- !u!1 &4126247485998425819
 GameObject:

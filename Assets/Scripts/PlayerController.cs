@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -111,14 +112,19 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage()
     {
         health -= 1;
-        Instantiate(explosionPrefab, transform.position, explosionPrefab.transform.rotation);
         if (health <= 0)
         {
             // Do die logic if health <= 0
             health = 0;
         }
+        Explode(gameObject.transform.position, damageExplosionRadius);
+        UpdateHealthUI();
+    }
 
-        var destroyableColliders = Physics2D.OverlapCircleAll(gameObject.GetComponent<Rigidbody2D>().position, damageExplosionRadius);
+    private void Explode(Vector2 where, float howBig)
+    {
+        Instantiate(explosionPrefab, where, explosionPrefab.transform.rotation);
+        var destroyableColliders = Physics2D.OverlapCircleAll(where, howBig);
         foreach (var toDestroyCollider in destroyableColliders)
         {
             if (toDestroyCollider.gameObject.CompareTag("Enemy"))
@@ -126,7 +132,6 @@ public class PlayerController : MonoBehaviour
                 Destroy(toDestroyCollider.gameObject);
             }
         }
-        UpdateHealthUI();
     }
     
 }
