@@ -56,8 +56,6 @@ namespace Enemy
         {
             if(!other.collider.gameObject.CompareTag("Player")) return;
             
-            var scoreController = ScoreController.Instance;
-            
             scoreController.AddScore(worthIfCaught);
             Destroy(gameObject);
         }

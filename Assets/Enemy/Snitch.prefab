@@ -49,8 +49,8 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 0
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -121,9 +121,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worthIfShot: 50
   damagePerSecond: 0
+  scoreController: {fileID: 0}
   moveSpeed: 4
   worthIfCaught: 200
   objectToRunFrom: {fileID: 0}
+  panicRadius: 10
+  randomDirectionChangeMillis: 1500
 --- !u!95 &8499687629862614067
 Animator:
   serializedVersion: 3

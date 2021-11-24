@@ -14,6 +14,7 @@ namespace Enemy
         public GameObject bumperPrefab;
         public GameObject dodgerPrefab;
         public GameObject player;
+        public ScoreController scoreController;
         private DateTime nextEnemySpawnTime = DateTime.Now;
         
         // Add Group spawning support
@@ -36,6 +37,7 @@ namespace Enemy
             {
                 nextEnemySpawnTime = DateTime.Now + TimeSpan.FromSeconds(1.0f + Random.Range(0.0f, 2.0f));
                 List<EnemyType> enemyTypesToSpawn = GenerateNextEnemyTypes();
+                GameObject enemy = null;
                 foreach (EnemyType enemyType in enemyTypesToSpawn)
                 {
                     switch (enemyType)
@@ -43,6 +45,7 @@ namespace Enemy
                         case EnemyType.Snitch:
                         {
                             var snitch = Instantiate(snitchPrefab, GenerateEnemyStartingPosition(), Quaternion.Euler(0, 0, 0));
+                            enemy = snitch;
                             snitch.GetComponent<SnitchController>().objectToRunFrom =
                                 player.GetComponent<Collider2D>();
                             break;
@@ -50,28 +53,31 @@ namespace Enemy
                         case EnemyType.Minion:
                         {
                             var minion = Instantiate(minionPrefab, GenerateEnemyStartingPosition(), Quaternion.Euler(0, 0, 0));
+                            enemy = minion;
                             minion.GetComponent<MinionController>().objectToChase =
                                 player.GetComponent<Collider2D>();
                             break;
                         }
                         case EnemyType.Walker:
                         {
-                            Instantiate(walkerPrefab, GenerateEnemyStartingPosition(), Quaternion.Euler(0, 0, 0));
+                            enemy = Instantiate(walkerPrefab, GenerateEnemyStartingPosition(), Quaternion.Euler(0, 0, 0));
                             break;
                         }
                         case EnemyType.Dodger:
                         {
                             var dodger = Instantiate(dodgerPrefab, GenerateEnemyStartingPosition(), Quaternion.Euler(0, 0, 0));
+                            enemy = dodger;
                             dodger.GetComponent<DodgerController>().objectToChase =
                                 player.GetComponent<Collider2D>();
                             break;
                         }
                         case EnemyType.Bumper:
                         {
-                            Instantiate(bumperPrefab, GenerateEnemyStartingPosition(), Quaternion.Euler(0, 0, 0));
+                            enemy = Instantiate(bumperPrefab, GenerateEnemyStartingPosition(), Quaternion.Euler(0, 0, 0));
                             break;
                         }
                     }
+                    if (enemy != null) enemy.GetComponent<AbstractEnemy>().scoreController = scoreController;
                 }
             }
         }

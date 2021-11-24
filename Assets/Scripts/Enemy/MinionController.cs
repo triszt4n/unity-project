@@ -20,7 +20,7 @@ namespace Enemy
         {
             direction = objectToChase.ClosestPoint(EnemyBody.position) - EnemyBody.position;
             EnemyBody.AddForce(
-                direction.normalized * moveSpeed * Time.fixedDeltaTime
+                direction.normalized * moveSpeed
             );
         }
     }

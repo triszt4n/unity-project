@@ -10,7 +10,8 @@ namespace Enemy
         protected Rigidbody2D EnemyBody;
         public int worthIfShot = 50;
         public int damagePerSecond = 1;
-        private DateTime lastCollisionWithPlayer = DateTime.MinValue; 
+        private DateTime lastCollisionWithPlayer = DateTime.MinValue;
+        public ScoreController scoreController;
         protected void Start()
         {
             EnemyBody = gameObject.GetComponent<Rigidbody2D>();
@@ -19,9 +20,7 @@ namespace Enemy
         protected void OnTriggerEnter2D(Collider2D other)
         {
             if(!other.gameObject.CompareTag("Projectile")) return;
-            
-            var scoreController = ScoreController.Instance;
-            
+
             scoreController.AddScore(worthIfShot);
             Destroy(other.gameObject);
             Destroy(gameObject);

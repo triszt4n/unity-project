@@ -316,7 +316,7 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -969,6 +969,7 @@ MonoBehaviour:
   bumperPrefab: {fileID: 707856662443602955, guid: 7ed0736f2818efe46ad758cf093e85c8, type: 3}
   dodgerPrefab: {fileID: 5749861561844494755, guid: 7115cded048cbc842a56904743e5f1cc, type: 3}
   player: {fileID: 661401318}
+  scoreController: {fileID: 306001009}
 --- !u!114 &306001009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1376,6 +1377,7 @@ MonoBehaviour:
   leftFirePoint: {fileID: 460051559}
   bulletPrefab: {fileID: 2183824875687146267, guid: b8d5a18a673204c46a01dcc0bf500b05, type: 3}
   hpBar: {fileID: 1028114326}
+  scoreController: {fileID: 306001009}
   maxHealth: 3
   health: 2
   scoresPerSecond: 10

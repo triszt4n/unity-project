@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public Transform leftFirePoint;
     public GameObject bulletPrefab;
     public HealthBar hpBar;
+    public ScoreController scoreController;
 
     public int maxHealth = 3;
     public int health = 2;
@@ -59,7 +60,6 @@ public class PlayerController : MonoBehaviour
 
     void AddScoreWhileAlive()
     {
-        var scoreController = ScoreController.Instance;
         scoreController.AddScore(scoresPerSecond);
     }
 
