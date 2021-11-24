@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     public int health = 2;
     public int scoresPerSecond = 10;
 
-
     public bool hasShield = false;
     
     // Start is called before the first frame update
@@ -34,7 +33,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 mousePos;
     
     public float moveSpeed = 10f;
-    public int framesBetweenShots = 30;
+    public int millisBetweenShots = 200;
+    private DateTime lastShot = DateTime.Now;
     
     private bool shootStarted = false;
 
@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             shootStarted = false;
-            tempFrameCount = 0; // reset the counter
         }
 
         ShootIfStarted();
@@ -78,20 +77,20 @@ public class PlayerController : MonoBehaviour
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
         playerRb.rotation = angle;
     }
-
-    private int tempFrameCount = 0;
     
     private void ShootIfStarted()
     {
         if (!shootStarted)
             return;
-        
-        if (tempFrameCount == 0)
+
+        long timeSinceLastShot = (long) (DateTime.Now - lastShot).TotalMilliseconds;
+
+        if (timeSinceLastShot >= millisBetweenShots)
+        {
+            lastShot = DateTime.Now;
             Shoot();
+        }
         
-        ++tempFrameCount;
-        if (tempFrameCount == framesBetweenShots)
-            tempFrameCount = 0;
     }
     
     private void Shoot()
