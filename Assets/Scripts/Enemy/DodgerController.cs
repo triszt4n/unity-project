@@ -20,7 +20,6 @@ namespace Enemy
         {
             List<Collider2D> toReturn = new List<Collider2D>();
             var collisions = Physics2D.OverlapCircleAll(EnemyBody.position, dodgeInRadius);
-            Debug.Log(gameObject + " colliding with " + collisions);
             foreach (var collider in collisions)
             {
                 if (collider.CompareTag("Projectile"))

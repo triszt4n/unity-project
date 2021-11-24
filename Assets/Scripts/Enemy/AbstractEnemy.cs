@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Enemy
 {
@@ -24,6 +23,7 @@ namespace Enemy
             var scoreController = ScoreController.Instance;
             
             scoreController.AddScore(worthIfShot);
+            Destroy(other.gameObject);
             Destroy(gameObject);
         }
 

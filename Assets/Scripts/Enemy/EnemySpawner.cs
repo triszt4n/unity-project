@@ -19,11 +19,11 @@ namespace Enemy
         // Add Group spawning support
         private Dictionary<EnemyType, double> spawnChances = new Dictionary<EnemyType, double>()
         {
-            {EnemyType.Snitch, 0.01},
-            {EnemyType.Minion, 0.01},
-            {EnemyType.Walker, 0.01},
-            {EnemyType.Dodger, 0.01},
-            {EnemyType.Bumper, 1.0}
+            {EnemyType.Snitch, 0.5},
+            {EnemyType.Minion, 0.5},
+            {EnemyType.Walker, 0.5},
+            {EnemyType.Dodger, 0.5},
+            {EnemyType.Bumper, 0.5}
         };
         private void Start()
         {

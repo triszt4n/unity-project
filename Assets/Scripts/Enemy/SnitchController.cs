@@ -12,16 +12,35 @@ namespace Enemy
         public float moveSpeed = 5f;
         public int worthIfCaught = 200;
         public Collider2D objectToRunFrom;
+        public float panicRadius = 10f;
+        public float randomDirectionChangeMillis = 1500;
         private new void Start()
         {
             base.Start();     
             
         }
 
+        private DateTime directionLastGenerated = DateTime.MinValue; 
+        private void GenerateRandomDirectionWhenNecessary()
+        {
+            if ((DateTime.Now - directionLastGenerated).TotalMilliseconds >= randomDirectionChangeMillis)
+            {
+                directionLastGenerated = DateTime.Now;
+                direction = Random.insideUnitCircle;
+            }
+        }
+
         private void Update()
         {
             var position = EnemyBody.position;
-            direction = position - objectToRunFrom.ClosestPoint(position);
+            if (objectToRunFrom.Distance(gameObject.GetComponent<Collider2D>()).distance <= panicRadius)
+            {
+                GenerateRandomDirectionWhenNecessary();
+            }
+            else
+            {
+                direction = position - objectToRunFrom.ClosestPoint(position);                
+            }
         }
 
         private void FixedUpdate()
