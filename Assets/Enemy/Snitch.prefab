@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -5186084356425594677}
   m_Layer: 0
   m_Name: Snitch
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,7 +120,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worthIfShot: 50
-  damagePerSecond: 0
   scoreController: {fileID: 0}
   moveSpeed: 4
   worthIfCaught: 200
