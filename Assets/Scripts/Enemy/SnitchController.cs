@@ -33,13 +33,14 @@ namespace Enemy
         private void Update()
         {
             var position = EnemyBody.position;
+            Debug.Log("Distance from chasing " + objectToRunFrom.Distance(gameObject.GetComponent<Collider2D>()).distance);
             if (objectToRunFrom.Distance(gameObject.GetComponent<Collider2D>()).distance <= panicRadius)
             {
-                GenerateRandomDirectionWhenNecessary();
+                direction = position - objectToRunFrom.ClosestPoint(position);          
             }
             else
-            {
-                direction = position - objectToRunFrom.ClosestPoint(position);                
+            {      
+                GenerateRandomDirectionWhenNecessary();
             }
         }
 
