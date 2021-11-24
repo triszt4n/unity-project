@@ -13,7 +13,7 @@ public class CameraFollow : MonoBehaviour
         followedObject = GameObject.FindGameObjectWithTag("Player");
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         // simple follow behaviour, might change to something more fancy later;
         if (followedObject == null) return;
