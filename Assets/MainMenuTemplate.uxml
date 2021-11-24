@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="UI Toolkit/UnityThemes/entropy-wars.uss" />
+    <ui:VisualElement name="Background" style="background-color: rgba(0, 0, 0, 0.79); flex-grow: 1; align-items: center; justify-content: center;">
+        <ui:VisualElement style="width: 265px; height: 340px; justify-content: center; align-items: center; background-color: rgba(9, 11, 26, 255); border-top-left-radius: 12px; border-bottom-left-radius: 12px; border-top-right-radius: 12px; border-bottom-right-radius: 12px;">
+            <ui:Label text="Entropy Wars" display-tooltip-when-elided="true" style="position: absolute; top: 32px; font-size: 28px; -unity-font: url(&apos;/Assets/TextMesh Pro/Fonts/LiberationSans.ttf&apos;); -unity-font-style: bold; color: rgba(255, 255, 255, 255);" />
+            <ui:Button text="Play" display-tooltip-when-elided="true" class="button-style" />
+            <ui:Button text="Scoreboard" display-tooltip-when-elided="true" class="button-style" />
+            <ui:Label text="2021 - v1.0.0" display-tooltip-when-elided="true" style="color: rgba(255, 255, 255, 255); position: absolute; bottom: 32px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
