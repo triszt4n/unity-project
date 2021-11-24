@@ -1,7 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerController))]
 public class ScoreController : Singleton<ScoreController>
 {
     public TextMeshProUGUI txt;

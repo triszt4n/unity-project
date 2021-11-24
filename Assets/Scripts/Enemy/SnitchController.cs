@@ -9,28 +9,19 @@ namespace Enemy
     public class SnitchController : AbstractEnemy
     {
         private Vector2 direction;
-        public int directionChangeMillis = 1500;
         public float moveSpeed = 5f;
         public int worthIfCaught = 200;
+        public Collider2D objectToRunFrom;
         private new void Start()
         {
-            base.Start();            
-        }
-
-        private DateTime lastChangedDirection = DateTime.Now;
-        private void ChangeDirectionWhenNeeded()
-        {
-            if ((DateTime.Now - lastChangedDirection).TotalMilliseconds >= directionChangeMillis)
-            {
-                lastChangedDirection = DateTime.Now;
-                var newDirection = Random.insideUnitCircle.normalized;
-                direction = newDirection;
-            }
+            base.Start();     
+            
         }
 
         private void Update()
         {
-            ChangeDirectionWhenNeeded();
+            var position = EnemyBody.position;
+            direction = position - objectToRunFrom.ClosestPoint(position);
         }
 
         private void FixedUpdate()
@@ -40,11 +31,10 @@ namespace Enemy
                 currentPosition + direction.normalized * moveSpeed * Time.fixedDeltaTime
             );
         }
-        private new void OnTriggerEnter2D(Collider2D other)
+
+        private new void OnCollisionEnter2D(Collision2D other)
         {
-            base.OnTriggerEnter2D(other);
-            
-            if(!other.gameObject.CompareTag("Player")) return;
+            if(!other.collider.gameObject.CompareTag("Player")) return;
             
             var scoreController = ScoreController.Instance;
             

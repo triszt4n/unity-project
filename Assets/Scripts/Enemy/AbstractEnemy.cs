@@ -10,6 +10,8 @@ namespace Enemy
     {
         protected Rigidbody2D EnemyBody;
         public int worthIfShot = 50;
+        public int damagePerSecond = 1;
+        private DateTime lastCollisionWithPlayer = DateTime.MinValue; 
         protected void Start()
         {
             EnemyBody = gameObject.GetComponent<Rigidbody2D>();
@@ -24,5 +26,24 @@ namespace Enemy
             scoreController.AddScore(worthIfShot);
             Destroy(gameObject);
         }
+
+        protected void OnCollisionEnter2D(Collision2D other)
+        {
+            if(!other.collider.gameObject.CompareTag("Player")) return;
+            if ((DateTime.Now - lastCollisionWithPlayer).Seconds < 1) return;
+            lastCollisionWithPlayer = DateTime.Now;
+            other.gameObject.GetComponent<PlayerController>().TakeDamage(damagePerSecond);
+        }
+    }
+
+    public enum EnemyType
+    {
+        Snitch,
+        Snake,
+        Shielded,
+        Minion,
+        Bumper,
+        Walker,
+        Dodger
     }
 }
