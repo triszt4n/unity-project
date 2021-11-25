@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 358299}
   - component: {fileID: 358298}
   - component: {fileID: 358297}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -671,7 +671,7 @@ GameObject:
   - component: {fileID: 225397811}
   - component: {fileID: 225397810}
   - component: {fileID: 225397809}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wall (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -852,16 +852,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f37cca427e14b5cac1eb9bec568a799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snitchPrefab: {fileID: 1750037550289206089, guid: 9aae7b323463202488c4ab2c06e88df5,
-    type: 3}
-  minionPrefab: {fileID: 3405698764218602886, guid: ffddbabc97dc9e748ac50e22ce91c76b,
-    type: 3}
-  walkerPrefab: {fileID: 285735928313717806, guid: 8dd280c7dfe7b834db355aabdfaf6c6d,
-    type: 3}
-  bumperPrefab: {fileID: 707856662443602955, guid: 7ed0736f2818efe46ad758cf093e85c8,
-    type: 3}
-  dodgerPrefab: {fileID: 5749861561844494755, guid: 7115cded048cbc842a56904743e5f1cc,
-    type: 3}
+  snitchPrefab: {fileID: 1750037550289206089, guid: 9aae7b323463202488c4ab2c06e88df5, type: 3}
+  minionPrefab: {fileID: 3405698764218602886, guid: ffddbabc97dc9e748ac50e22ce91c76b, type: 3}
+  walkerPrefab: {fileID: 285735928313717806, guid: 8dd280c7dfe7b834db355aabdfaf6c6d, type: 3}
+  bumperPrefab: {fileID: 707856662443602955, guid: 7ed0736f2818efe46ad758cf093e85c8, type: 3}
+  dodgerPrefab: {fileID: 5749861561844494755, guid: 7115cded048cbc842a56904743e5f1cc, type: 3}
+  shieldedPrefab: {fileID: 1363140519032203805, guid: d82226b52770bd54897a850809dae4c8, type: 3}
   player: {fileID: 661401318}
   scoreController: {fileID: 306001009}
   difficultyController: {fileID: 306001011}
@@ -1046,7 +1042,7 @@ GameObject:
   - component: {fileID: 526777549}
   - component: {fileID: 526777548}
   - component: {fileID: 526777547}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wall (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2215,7 +2211,7 @@ GameObject:
   - component: {fileID: 1438665306}
   - component: {fileID: 1438665305}
   - component: {fileID: 1438665304}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wall (3)
   m_TagString: Wall
   m_Icon: {fileID: 0}

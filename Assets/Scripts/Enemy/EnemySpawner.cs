@@ -13,6 +13,7 @@ namespace Enemy
         public GameObject walkerPrefab;
         public GameObject bumperPrefab;
         public GameObject dodgerPrefab;
+        public GameObject shieldedPrefab;
         public GameObject player;
         public ScoreController scoreController;
         private DateTime nextEnemySpawnTime = DateTime.Now;
@@ -29,6 +30,7 @@ namespace Enemy
             {EnemyType.Walker, 0.8f},
             {EnemyType.Dodger, 0.01f},
             {EnemyType.Bumper, 0.8f}
+            {EnemyType.Shielded, 0.3}
         };
         
         private Dictionary<EnemyType, float> spawnChances = new Dictionary<EnemyType, float>()
@@ -127,6 +129,14 @@ namespace Enemy
                     {
                         switch (enemyType)
                         {
+
+                            case EnemyType.Shielded:
+                            {
+                                enemy  = Instantiate(shieldedPrefab, GenerateEnemyStartingPosition(),
+                                    Quaternion.Euler(0, 0, 0));
+                                enemy.GetComponent<ShieldedBumperController>().player = player;
+                                break;
+                            }
                             case EnemyType.Snitch:
                             {
                                 var snitch = Instantiate(snitchPrefab, GenerateEnemyStartingPosition(),
