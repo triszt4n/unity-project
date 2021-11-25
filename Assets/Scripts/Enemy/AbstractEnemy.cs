@@ -9,8 +9,6 @@ namespace Enemy
     {
         protected Rigidbody2D EnemyBody;
         public int worthIfShot = 50;
-        public int damagePerSecond = 1;
-        private DateTime lastCollisionWithPlayer = DateTime.MinValue;
         public ScoreController scoreController;
         protected void Start()
         {
@@ -28,10 +26,33 @@ namespace Enemy
 
         protected void OnCollisionEnter2D(Collision2D other)
         {
+            // We don't collide if
+            // * This is not a player
             if(!other.collider.gameObject.CompareTag("Player")) return;
-            if ((DateTime.Now - lastCollisionWithPlayer).Seconds < 1) return;
-            lastCollisionWithPlayer = DateTime.Now;
-            other.gameObject.GetComponent<PlayerController>().TakeDamage(damagePerSecond);
+            var playerController = other.collider.gameObject.GetComponent<PlayerController>();
+            
+            // * Somebody have recently collided with them
+            // * It is a player but he has a shield
+            if ((DateTime.Now - playerController.lastCollision).TotalMilliseconds < playerController.invulnaribilityMillis ||
+               playerController.hasShield)
+                return;
+            playerController.lastCollision = DateTime.Now;
+            playerController.TakeDamage();
+        }
+
+        public static int EnemyGroupSize (EnemyType enemyType)
+        {
+            switch (enemyType)
+            {
+                case EnemyType.Bumper: return 3;
+                case EnemyType.Dodger: return 4;
+                case EnemyType.Minion: return 5;
+                case EnemyType.Walker: return 3;
+                case EnemyType.Snake: return 2;
+                case EnemyType.Shielded: return 2;
+                case EnemyType.Snitch: return 1;
+                default: return 1;
+            }
         }
     }
 
