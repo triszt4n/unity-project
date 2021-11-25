@@ -181,7 +181,6 @@ namespace Enemy
             {
                 startPosition = new Vector2(Random.Range(-59, 59), Random.Range(-29, 29));
             }
-            Debug.Log("Generating start position:" + startPosition);
             return startPosition;
         }
 
