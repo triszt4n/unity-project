@@ -1461,7 +1461,7 @@ MonoBehaviour:
   hpBar: {fileID: 1028114326}
   scoreController: {fileID: 306001009}
   invulnaribilityMillis: 1500
-  damageExplosionRadius: 10
+  damageExplosionRadius: 30
   maxHealth: 3
   health: 2
   scoresPerSecond: 10
