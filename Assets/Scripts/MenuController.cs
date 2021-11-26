@@ -60,5 +60,9 @@ public class MenuController : MonoBehaviour
         ScoreController.startingScore = 0;
         SceneManager.LoadScene("Scenes/GameScene");
     }
-    
+
+    public void OpenScoreboard()
+    {
+        SceneManager.LoadScene("Scenes/ScoreboardScene");
+    }
 }
