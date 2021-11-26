@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
 
     public void SaveGame()
     {
-        var fileName = Application.persistentDataPath + MenuController.saveGameFileName;
+        var fileName = Application.persistentDataPath + MenuController.SAVE_GAME_FILENAME;
         List<MenuController.HighScore> highScores = null;
         FileStream fileContent;
         XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<MenuController.HighScore>));
