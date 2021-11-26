@@ -6,18 +6,32 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     private GameObject followedObject;
-
+    public float timeOffset = 10;
+    public float leftLimit = -44;
+    public float rightLimit = 44;
+    public float topLimit = 23;
+    public float bottomLimit = 23;
+    
     // Start is called before the first frame update
     void Start()
     {
         followedObject = GameObject.FindGameObjectWithTag("Player");
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
-        // simple follow behaviour, might change to something more fancy later;
         if (followedObject == null) return;
-        transform.position = new Vector3(followedObject.transform.position.x, followedObject.transform.position.y,
-            transform.position.z);
+
+        Vector3 startPos = transform.position;
+        Vector3 endPos = followedObject.transform.position;
+        endPos.z = transform.position.z;
+        
+        transform.position = Vector3.Lerp(startPos, endPos, timeOffset * Time.fixedDeltaTime);
+        transform.position = new Vector3
+        (
+            Mathf.Clamp(transform.position.x, leftLimit, rightLimit),
+            Mathf.Clamp(transform.position.y, bottomLimit, topLimit),
+            transform.position.z
+        );
     }
 }

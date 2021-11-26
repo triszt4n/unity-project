@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 3650996231795725234}
   - component: {fileID: 3650996231795725235}
   - component: {fileID: 3650996231795725232}
+  - component: {fileID: 7184967257768183391}
   m_Layer: 0
   m_Name: Hologram
   m_TagString: Untagged
@@ -135,7 +136,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d6dfa61a6f249fe498ae99820110c385, type: 3}
-  m_Color: {r: 0, g: 0.3778025, b: 0.4339623, a: 0.53333336}
+  m_Color: {r: 0.5801887, g: 0.9367077, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -160,6 +161,18 @@ MonoBehaviour:
   player: {fileID: 0}
   rightFirePoint: {fileID: 3650996231287216201}
   leftFirePoint: {fileID: 3650996231523310691}
-  bulletPrefab: {fileID: 4885041192967206471, guid: 23950232e9844764a9aed6438ebe7c58, type: 3}
+  bulletPrefab: {fileID: 8961989152580806322, guid: 395aa4cc07c72e24eb5bbf724d625aa6, type: 3}
   followTime: 1
   shootInterval: 0.3
+--- !u!122 &7184967257768183391
+Halo:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3650996231795725233}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 2940487723
+  m_Size: 0.85
