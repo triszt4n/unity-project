@@ -20,22 +20,22 @@ namespace Enemy
         private DifficultyController.Difficulty difficulty;
         
         // Add Group spawning support
-        private Dictionary<EnemyType, double> spawnChancesEasy = new Dictionary<EnemyType, double>()
+        private Dictionary<EnemyType, float> spawnChancesEasy = new Dictionary<EnemyType, float>()
         {
-            {EnemyType.Snitch, 0.5},
-            {EnemyType.Minion, 0.3},
-            {EnemyType.Walker, 0.8},
-            {EnemyType.Dodger, 0.01},
-            {EnemyType.Bumper, 0.8}
+            {EnemyType.Snitch, 0.5f},
+            {EnemyType.Minion, 0.3f},
+            {EnemyType.Walker, 0.8f},
+            {EnemyType.Dodger, 0.01f},
+            {EnemyType.Bumper, 0.8f}
         };
         
-        private Dictionary<EnemyType, double> spawnChances = new Dictionary<EnemyType, double>()
+        private Dictionary<EnemyType, float> spawnChances = new Dictionary<EnemyType, float>()
         {
-            {EnemyType.Snitch, 1.0},
-            {EnemyType.Minion, 1.0},
-            {EnemyType.Walker, 1.0},
-            {EnemyType.Dodger, 1.0},
-            {EnemyType.Bumper, 1.0}
+            {EnemyType.Snitch, 1.0f},
+            {EnemyType.Minion, 1.0f},
+            {EnemyType.Walker, 1.0f},
+            {EnemyType.Dodger, 1.0f},
+            {EnemyType.Bumper, 1.0f}
         };
 
         private void Start()
@@ -73,25 +73,25 @@ namespace Enemy
                 case DifficultyController.Difficulty.Normal:
                 {
                     spawnChances[EnemyType.Snitch] = spawnChancesEasy[EnemyType.Snitch] / 2;
-                    spawnChances[EnemyType.Minion] = spawnChancesEasy[EnemyType.Minion] * 1.5;
-                    spawnChances[EnemyType.Walker] = spawnChancesEasy[EnemyType.Walker] / 1.5;
+                    spawnChances[EnemyType.Minion] = spawnChancesEasy[EnemyType.Minion] * 1.5f;
+                    spawnChances[EnemyType.Walker] = spawnChancesEasy[EnemyType.Walker] / 1.5f;
                     spawnChances[EnemyType.Dodger] = spawnChancesEasy[EnemyType.Dodger] * 5;
-                    spawnChances[EnemyType.Bumper] = spawnChancesEasy[EnemyType.Bumper] / 1.5;
+                    spawnChances[EnemyType.Bumper] = spawnChancesEasy[EnemyType.Bumper] / 1.5f;
                     break;
                 }
                 case DifficultyController.Difficulty.Hard:
                 {
                     spawnChances[EnemyType.Snitch] = spawnChancesEasy[EnemyType.Snitch] / 5;
-                    spawnChances[EnemyType.Minion] = spawnChancesEasy[EnemyType.Minion] * 2.0;
-                    spawnChances[EnemyType.Walker] = spawnChancesEasy[EnemyType.Walker] / 2.0;
+                    spawnChances[EnemyType.Minion] = spawnChancesEasy[EnemyType.Minion] * 2.0f;
+                    spawnChances[EnemyType.Walker] = spawnChancesEasy[EnemyType.Walker] / 2.0f;
                     spawnChances[EnemyType.Dodger] = spawnChancesEasy[EnemyType.Dodger] * 15;
-                    spawnChances[EnemyType.Bumper] = spawnChancesEasy[EnemyType.Bumper] / 2.0;
+                    spawnChances[EnemyType.Bumper] = spawnChancesEasy[EnemyType.Bumper] / 2.0f;
                     break;
                 }
                 case DifficultyController.Difficulty.VeryHard:
                 {
                     spawnChances[EnemyType.Snitch] = spawnChancesEasy[EnemyType.Snitch] / 20;
-                    spawnChances[EnemyType.Minion] = spawnChancesEasy[EnemyType.Minion] * 3.0;
+                    spawnChances[EnemyType.Minion] = spawnChancesEasy[EnemyType.Minion] * 3.0f;
                     spawnChances[EnemyType.Walker] = spawnChancesEasy[EnemyType.Walker];
                     spawnChances[EnemyType.Dodger] = spawnChancesEasy[EnemyType.Dodger] * 50;
                     spawnChances[EnemyType.Bumper] = spawnChancesEasy[EnemyType.Bumper];
@@ -203,13 +203,13 @@ namespace Enemy
             {
                 if (spawnChances.ContainsKey(type))
                 {
-                    var generatedValue = Random.value;
-                    while (generatedValue >= 1.0)
+                    var chance = spawnChances[type];
+                    while (chance >= 1.0)
                     {
                         toReturn.Add(type);
-                        generatedValue--;
+                        chance--;
                     }
-                    if (generatedValue <= spawnChances[type])
+                    if (Random.value <= chance)
                     {
                         toReturn.Add(type);
                     }
