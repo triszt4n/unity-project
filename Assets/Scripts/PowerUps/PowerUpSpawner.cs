@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Enemy;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -42,7 +41,7 @@ namespace PowerUps
             {
                 nextSpawnTime =
                     DateTime.Now + TimeSpan.FromSeconds(Random.Range(spawnTimeSpanStart, spawnTimeSpanEnd));
-                var toGenerate = GenerateNextEnemyTypes();
+                var toGenerate = GenerateNextPowerUpTypes();
                 GameObject powerUp = null;
                 foreach (PowerUpType powerUpType in toGenerate)
                 {
@@ -99,7 +98,7 @@ namespace PowerUps
             SuperMode
         }
         
-        private List<PowerUpType> GenerateNextEnemyTypes()
+        private List<PowerUpType> GenerateNextPowerUpTypes()
         {
             List<PowerUpType> toReturn = new List<PowerUpType>();
             foreach (PowerUpType type in Enum.GetValues(typeof(PowerUpType)))
