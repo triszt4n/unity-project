@@ -161,7 +161,7 @@ MonoBehaviour:
   player: {fileID: 0}
   rightFirePoint: {fileID: 3650996231287216201}
   leftFirePoint: {fileID: 3650996231523310691}
-  bulletPrefab: {fileID: 4885041192967206471, guid: 23950232e9844764a9aed6438ebe7c58, type: 3}
+  bulletPrefab: {fileID: 8961989152580806322, guid: 395aa4cc07c72e24eb5bbf724d625aa6, type: 3}
   followTime: 1
   shootInterval: 0.3
 --- !u!122 &7184967257768183391
