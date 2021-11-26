@@ -42,17 +42,28 @@ namespace Enemy
 
         public static int EnemyGroupSize (EnemyType enemyType)
         {
+            int toReturn;
             switch (enemyType)
             {
-                case EnemyType.Bumper: return 3;
-                case EnemyType.Dodger: return 4;
-                case EnemyType.Minion: return 5;
-                case EnemyType.Walker: return 3;
-                case EnemyType.Snake: return 2;
-                case EnemyType.Shielded: return 2;
-                case EnemyType.Snitch: return 1;
-                default: return 1;
+                case EnemyType.Bumper: toReturn = 3;
+                    break;
+                case EnemyType.Dodger: toReturn = 4;
+                    break;
+                case EnemyType.Minion: toReturn = 5;
+                    break;
+                case EnemyType.Walker: toReturn = 3;
+                    break;
+                case EnemyType.Snake: toReturn = 2;
+                    break;
+                case EnemyType.Shielded: toReturn = 2;
+                    break;
+                case EnemyType.Snitch: toReturn = 1;
+                    break;
+                default: toReturn = 1;
+                    break;
             }
+
+            return toReturn;
         }
     }
 
