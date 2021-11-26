@@ -24,12 +24,12 @@ Játékunk a [Geometry Wars 2](https://www.youtube.com/watch?v=1E5b_wbspaQ) cím
 
 ### Ellenséges egységek
 
-- Minion: egy kis csoportban generálódnak, követnek X tempóban (ahogy nehezedik a játék, annyival gyorsabbak lesznek)
+- Minion: egy kis csoportban generálódnak, követnek gyorsulva feléd
 - Walker: egy kis csoportban generálódnak, random mozognak
-- Dodger: egyenes vonalakban mozognak, fallal való ütközéskor irányt változtat
+- Bumper: egyenes vonalakban mozognak, fallal való ütközéskor irányt változtat
+- Dodger: követnek állandó sebességgel, és próbálják kikerülni a lövedékeid
 - Snitch: amit ha sikerül elkapnod, akkor extra pont (cikkesz)
 - Shielded: pajzsa van, csak egy bizonyos irányból lehet eltalálni
-- Snake: kígyó, aminek testétől is sebződsz, de a fejét eltalálva pusztul csak el.
 
 ### Boostok
 
@@ -44,4 +44,4 @@ Az időhöz kötött boostok egy 2 elemű FIFO-ban helyezkednek el, ami azt jele
 
 - TemporaryBoost #0: generálódik mögötted egy holografikus másolat az űrhajódról, ami követ és utánozza, amit csinálsz, csupán 1s késleltetéssel mindezt.
 - TemporaryBoost #1: pajzsot kapsz, bizonyos ideig sérthetetlen maradsz
-- TemporaryBoost #2: amihez hozzáérsz, meghal, de egyben pajzsot is kapsz, és gyorsabbá válsz
+- TemporaryBoost #2: gyorsabbá válsz
