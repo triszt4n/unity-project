@@ -2,6 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
+using System.Xml.Serialization;
+using Unity.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -120,6 +123,35 @@ public class PlayerController : MonoBehaviour
         UpdateHealthUI();
     }
 
+    public void SaveGame()
+    {
+        var fileName = Application.persistentDataPath + MenuController.saveGameFileName;
+        List<MenuController.HighScore> highScores = null;
+        FileStream fileContent;
+        XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<MenuController.HighScore>));
+        if (File.Exists(fileName))
+        {
+            fileContent = File.Open(fileName, FileMode.Open);
+            highScores = xmlSerializer.Deserialize(fileContent) as List<MenuController.HighScore>;
+            fileContent.Close();
+        }
+        fileContent = File.Open(fileName, FileMode.Create);
+        highScores ??= new List<MenuController.HighScore>();
+        highScores.Add(
+            new MenuController.HighScore()
+            {
+                score = scoreController.CurrentScore,
+                time = DateTime.Now
+            }
+        );
+        xmlSerializer.Serialize(fileContent, highScores);
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveGame();
+    }
+    
     private void Explode(Vector2 where, float howBig)
     {
         Instantiate(explosionPrefab, where, explosionPrefab.transform.rotation);
@@ -132,5 +164,5 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    
+
 }
