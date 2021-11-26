@@ -9,6 +9,7 @@ namespace Enemy
     {
         private Vector2 direction;
         public float moveSpeed = 5f;
+        public float maxSpeed = 12f;
         public Collider2D objectToChase;
 
         private new void Start()
@@ -22,6 +23,11 @@ namespace Enemy
             EnemyBody.AddForce(
                 direction.normalized * moveSpeed
             );
+            // max speed
+            if (EnemyBody.velocity.magnitude > maxSpeed)
+            {
+                EnemyBody.velocity = EnemyBody.velocity.normalized * maxSpeed;
+            }
         }
     }
 }
