@@ -5,11 +5,13 @@ public class ScoreController : MonoBehaviour
 {
     public TextMeshProUGUI txt;
 
+    public static int startingScore = 0;
     public int CurrentScore { get; private set; } = 0;
 
     private void Start()
     {
         UpdateUI();
+        CurrentScore = startingScore;
     }
 
     private void UpdateUI()
