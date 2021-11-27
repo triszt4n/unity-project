@@ -29,8 +29,8 @@ namespace Enemy
             {EnemyType.Minion, 0.3f},
             {EnemyType.Walker, 0.8f},
             {EnemyType.Dodger, 0.01f},
-            {EnemyType.Bumper, 0.8f}
-            {EnemyType.Shielded, 0.3}
+            {EnemyType.Bumper, 0.8f},
+            {EnemyType.Shielded, 0.3f}
         };
         
         private Dictionary<EnemyType, float> spawnChances = new Dictionary<EnemyType, float>()
