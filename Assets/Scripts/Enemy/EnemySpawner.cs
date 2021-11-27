@@ -18,7 +18,9 @@ namespace Enemy
         private DateTime nextEnemySpawnTime = DateTime.Now;
         public DifficultyController difficultyController;
         private DifficultyController.Difficulty difficulty;
-        
+        public float spawnTimeSpanStart = 2.0f;
+        public float spawnTimeSpanEnd = 5.0f; 
+
         // Add Group spawning support
         private Dictionary<EnemyType, float> spawnChancesEasy = new Dictionary<EnemyType, float>()
         {
@@ -40,7 +42,7 @@ namespace Enemy
 
         private void Start()
         {
-            nextEnemySpawnTime = DateTime.Now + TimeSpan.FromSeconds(2.0f);
+            nextEnemySpawnTime = DateTime.Now + TimeSpan.FromSeconds(Random.Range(spawnTimeSpanStart, spawnTimeSpanEnd));
             difficulty = difficultyController.GetDifficulty();
             UpdateSpawnChancesForDifficulty();
         }
@@ -113,7 +115,7 @@ namespace Enemy
         {
             if (DateTime.Now >= nextEnemySpawnTime)
             {
-                nextEnemySpawnTime = DateTime.Now + TimeSpan.FromSeconds(1.0f + Random.Range(0.0f, 2.0f));
+                nextEnemySpawnTime = DateTime.Now + TimeSpan.FromSeconds(Random.Range(spawnTimeSpanStart, spawnTimeSpanEnd));
                 List<EnemyType> enemyTypesToSpawn = GenerateNextEnemyTypes();
                 GameObject enemy = null;
                 foreach (EnemyType enemyType in enemyTypesToSpawn)
