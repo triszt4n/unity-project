@@ -16,7 +16,7 @@ namespace PowerUps
         public float spawnTimeSpanStart = 2.0f;
         public float spawnTimeSpanEnd = 5.0f;
         private DateTime nextSpawnTime = DateTime.Now;
-        private Camera camera;
+        private Camera cam;
 
         // Add Group spawning support
         private Dictionary<PowerUpType, double> spawnChances = new Dictionary<PowerUpType, double>()
@@ -31,7 +31,7 @@ namespace PowerUps
         private void Start()
         {
             nextSpawnTime = DateTime.Now + TimeSpan.FromSeconds(Random.Range(spawnTimeSpanStart, spawnTimeSpanEnd));
-            camera = Camera.main;
+            cam = Camera.main;
         }
 
         private void Update()
@@ -78,7 +78,7 @@ namespace PowerUps
         private Vector2 GeneratePowerUpStartingPosition()
         {
             Vector2 startPosition = new Vector2(Random.Range(-55, 55), Random.Range(-25, 25));
-            while (CameraContainsPoint(camera, startPosition))
+            while (CameraContainsPoint(cam, startPosition))
             {
                 startPosition = new Vector2(Random.Range(-55, 55), Random.Range(-25, 25));
             }
