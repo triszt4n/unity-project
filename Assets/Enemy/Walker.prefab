@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1879879614135931732}
   - component: {fileID: 1558802185855856381}
   - component: {fileID: -2481419082087810891}
-  - component: {fileID: 8280742924118446628}
+  - component: {fileID: 3044348443064448069}
   m_Layer: 0
   m_Name: Walker
   m_TagString: Enemy
@@ -143,8 +143,8 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &8280742924118446628
-BoxCollider2D:
+--- !u!60 &3044348443064448069
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -156,7 +156,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0017700642, y: -0.0392583}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -166,6 +166,34 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.15420344, y: 0.27425534}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.39, y: 0.089999996}
+      - {x: 0.39, y: 0.31}
+      - {x: 0.38, y: 0.32999998}
+      - {x: 0.19999999, y: 0.32999998}
+      - {x: 0.14999999, y: 0.22999999}
+      - {x: 0.04, y: 0.29}
+      - {x: -0.03, y: 0.28}
+      - {x: -0.099999994, y: 0.22999999}
+      - {x: -0.24, y: 0.32999998}
+      - {x: -0.35999998, y: 0.32999998}
+      - {x: -0.39, y: 0.29999998}
+      - {x: -0.39, y: 0.04}
+      - {x: -0.22999999, y: -0.19}
+      - {x: -0.099999994, y: -0.35}
+      - {x: -0.03, y: -0.35999998}
+      - {x: 0.06, y: -0.35999998}
+      - {x: 0.089999996, y: -0.32999998}
+      - {x: 0.19999999, y: -0.22999999}
+      - {x: 0.38, y: 0.01}
+    - - {x: -0.06, y: 0.14}
+      - {x: -0.099999994, y: 0.14}
+      - {x: -0.08, y: 0.14999999}
+      - {x: -0.04, y: 0.11}
+      - {x: -0.03, y: 0.12}
+    - - {x: 0.04, y: 0.11}
+      - {x: 0.08, y: 0.14999999}
+      - {x: 0.099999994, y: 0.14}
+      - {x: 0.06, y: 0.14}
+      - {x: 0.03, y: 0.12}
