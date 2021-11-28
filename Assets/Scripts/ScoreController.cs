@@ -30,4 +30,10 @@ public class ScoreController : MonoBehaviour
         CurrentScore = 0;
         UpdateUI();
     }
+
+    public void HalfScore()
+    {
+        CurrentScore = CurrentScore / 2;
+        UpdateUI();
+    }
 }

@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     public int scoresPerSecond = 10;
 
     public bool hasShield = false;
+
+    public DeathMenu deathMenu;
     
     // Start is called before the first frame update
     void Start()
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
         UpdateHealthUI();
         InvokeRepeating(nameof(AddScoreWhileAlive), 0.0f, 1.0f);
     }
+
 
     private Vector2 movement;
     private Vector2 mousePos;
@@ -117,6 +120,10 @@ public class PlayerController : MonoBehaviour
         if (health <= 0)
         {
             // Do die logic if health <= 0
+            StopAddScore();
+            Time.timeScale = 0;
+            int score = scoreController.CurrentScore;
+            deathMenu.ToggleEndMenu(this);
             health = 0;
         }
         Explode(gameObject.transform.position, damageExplosionRadius);
@@ -163,6 +170,13 @@ public class PlayerController : MonoBehaviour
                 Destroy(toDestroyCollider.gameObject);
             }
         }
+    }
+
+    public void ContinueGame()
+    {
+        Time.timeScale = 1;
+        scoreController.HalfScore();
+        health = 2;
     }
 
 }
