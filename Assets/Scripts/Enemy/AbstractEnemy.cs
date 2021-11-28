@@ -32,7 +32,8 @@ namespace Enemy
         {
             if (debris != null)
             {
-                Instantiate(debris, transform.position, transform.rotation);
+                var debrisController = Instantiate(debris, transform.position, transform.rotation);
+                debrisController.gameObject.transform.position += Vector3.forward; // put debris in background
             }
             Destroy(gameObject);
         }
