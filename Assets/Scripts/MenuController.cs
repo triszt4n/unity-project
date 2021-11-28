@@ -12,7 +12,7 @@ public class MenuController : MonoBehaviour
 {
     public TextMeshProUGUI continueButtonText;
     public GameObject continueButtonObject;
-    public static string saveGameFileName = "HIGHSCORE.lol";
+    public static string SAVE_GAME_FILENAME = "HIGHSCORE.xml";
 
     [Serializable]
     public class HighScore
@@ -24,7 +24,7 @@ public class MenuController : MonoBehaviour
 
     private void Start()
     {
-        string fileName = Application.persistentDataPath + saveGameFileName;
+        string fileName = Application.persistentDataPath + SAVE_GAME_FILENAME;
         string newValue = "";
         if (File.Exists(fileName))
         {
@@ -60,5 +60,9 @@ public class MenuController : MonoBehaviour
         ScoreController.startingScore = 0;
         SceneManager.LoadScene("Scenes/GameScene");
     }
-    
+
+    public void OpenScoreboard()
+    {
+        SceneManager.LoadScene("Scenes/ScoreboardScene");
+    }
 }
