@@ -69,8 +69,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worthIfShot: 50
+  debris: {fileID: 8266953005243861743, guid: 37d62a66da746bc4c91432f81b812473, type: 3}
   scoreController: {fileID: 0}
   moveSpeed: 8
+  maxSpeed: 12
   objectToChase: {fileID: 0}
 --- !u!212 &3396833196915817877
 SpriteRenderer:

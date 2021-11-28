@@ -9,7 +9,9 @@ namespace Enemy
     {
         protected Rigidbody2D EnemyBody;
         public int worthIfShot = 50;
+        public DebrisController debris;
         public ScoreController scoreController;
+
         protected void Start()
         {
             EnemyBody = gameObject.GetComponent<Rigidbody2D>();
@@ -17,55 +19,76 @@ namespace Enemy
 
         protected void OnTriggerEnter2D(Collider2D other)
         {
-            if(!other.gameObject.CompareTag("Projectile")) return;
+            if (!other.gameObject.CompareTag("Projectile")) return;
 
+
+           
             scoreController.AddScore(worthIfShot);
             Destroy(other.gameObject);
-            Destroy(gameObject);
+            InitiateDestroy();
         }
 
+        public void InitiateDestroy()
+        {
+            if (debris != null)
+            {
+                Instantiate(debris, transform.position, transform.rotation);
+            }
+            Destroy(gameObject);
+        }
+        
         protected void OnCollisionEnter2D(Collision2D other)
         {
             // We don't collide if
             // * This is not a player
-            if(!other.collider.gameObject.CompareTag("Player")) return;
+            if (!other.collider.gameObject.CompareTag("Player")) return;
             var playerController = other.collider.gameObject.GetComponent<PlayerController>();
-            
+
             // * Somebody have recently collided with them
             // * It is a player but he has a shield
-            if ((DateTime.Now - playerController.lastCollision).TotalMilliseconds < playerController.invulnaribilityMillis ||
-               playerController.hasShield)
+            if ((DateTime.Now - playerController.lastCollision).TotalMilliseconds <
+                playerController.invulnaribilityMillis ||
+                playerController.hasShield)
                 return;
             playerController.lastCollision = DateTime.Now;
             playerController.TakeDamage();
         }
 
-        public static int EnemyGroupSize (EnemyType enemyType)
+        public static int EnemyGroupSize(EnemyType enemyType)
         {
             int toReturn;
             switch (enemyType)
             {
-                case EnemyType.Bumper: toReturn = 3;
+                case EnemyType.Bumper:
+                    toReturn = 3;
                     break;
-                case EnemyType.Dodger: toReturn = 4;
+                case EnemyType.Dodger:
+                    toReturn = 4;
                     break;
-                case EnemyType.Minion: toReturn = 5;
+                case EnemyType.Minion:
+                    toReturn = 5;
                     break;
-                case EnemyType.Walker: toReturn = 3;
+                case EnemyType.Walker:
+                    toReturn = 3;
                     break;
-                case EnemyType.Snake: toReturn = 2;
+                case EnemyType.Snake:
+                    toReturn = 2;
                     break;
-                case EnemyType.Shielded: toReturn = 2;
+                case EnemyType.Shielded:
+                    toReturn = 2;
                     break;
-                case EnemyType.Snitch: toReturn = 1;
+                case EnemyType.Snitch:
+                    toReturn = 1;
                     break;
-                default: toReturn = 1;
+                default:
+                    toReturn = 1;
                     break;
             }
 
             return toReturn;
         }
     }
+
 
     public enum EnemyType
     {
