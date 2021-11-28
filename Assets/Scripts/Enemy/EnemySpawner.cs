@@ -18,7 +18,7 @@ namespace Enemy
         public ScoreController scoreController;
         private DateTime nextEnemySpawnTime = DateTime.Now;
         public DifficultyController difficultyController;
-        private DifficultyController.Difficulty difficulty;
+        private DifficultyController.Difficulty? difficulty;
         public float spawnTimeSpanStart = 2.0f;
         public float spawnTimeSpanEnd = 5.0f; 
 
@@ -46,7 +46,7 @@ namespace Enemy
         private void Start()
         {
             nextEnemySpawnTime = DateTime.Now + TimeSpan.FromSeconds(Random.Range(spawnTimeSpanStart, spawnTimeSpanEnd));
-            difficulty = difficultyController.GetDifficulty();
+            difficulty = null;
             UpdateSpawnChancesForDifficulty();
         }
 
@@ -116,6 +116,14 @@ namespace Enemy
                     spawnChances[EnemyType.Shielded] = spawnChancesEasy[EnemyType.Shielded] * 5;
                     break;
                 }
+                default:
+                    spawnChances[EnemyType.Snitch] = spawnChancesEasy[EnemyType.Snitch];
+                    spawnChances[EnemyType.Minion] = spawnChancesEasy[EnemyType.Minion];
+                    spawnChances[EnemyType.Walker] = spawnChancesEasy[EnemyType.Walker];
+                    spawnChances[EnemyType.Dodger] = spawnChancesEasy[EnemyType.Dodger];
+                    spawnChances[EnemyType.Bumper] = spawnChancesEasy[EnemyType.Bumper];
+                    spawnChances[EnemyType.Shielded] = spawnChancesEasy[EnemyType.Shielded];
+                    break;
             }
         }
 
