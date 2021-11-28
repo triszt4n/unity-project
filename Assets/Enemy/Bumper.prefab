@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worthIfShot: 50
+  debris: {fileID: 6613368218360990993, guid: feba61a78f6495b42afa9ad20e4c90aa, type: 3}
   scoreController: {fileID: 0}
   moveSpeed: 8
 --- !u!95 &1200934188683050686
