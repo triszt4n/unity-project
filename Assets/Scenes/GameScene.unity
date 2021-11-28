@@ -831,6 +831,7 @@ GameObject:
   - component: {fileID: 306001009}
   - component: {fileID: 306001008}
   - component: {fileID: 306001011}
+  - component: {fileID: 306001012}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -901,6 +902,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreController: {fileID: 306001009}
+--- !u!114 &306001012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306001007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abe5d6b40f3846f3bc1bf9dca94099d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthPrefab: {fileID: 2407059588809738070, guid: ccbebc1048567a447b8ccd2bf2a2b5c4, type: 3}
+  hologramPickupPrefab: {fileID: 5927605600873826909, guid: 42017469155001a4084283756154e8eb, type: 3}
+  hologramShipPrefab: {fileID: 3650996231795725233, guid: 41f47d41e502e7849910291e8b1e9163, type: 3}
+  shieldPrefab: {fileID: 2387588437133553504, guid: 447a7e632c6f0c44cbbb29ac0d5d83a5, type: 3}
+  gatePrefab: {fileID: 3718171198719618835, guid: 9c7884745c619424b99f4974010e15d1, type: 3}
+  superModePrefab: {fileID: 1554330984125595188, guid: 10ebe2aa8319f7048b9c58e2ac36cd6e, type: 3}
+  explosionPrefab: {fileID: 516489693114719762, guid: 98d379976d0200247be695a72880e69b, type: 3}
+  spawnTimeSpanStart: 2
+  spawnTimeSpanEnd: 5
 --- !u!1 &352581855
 GameObject:
   m_ObjectHideFlags: 0
