@@ -30,7 +30,7 @@ namespace Enemy
             {EnemyType.Walker, 0.8f},
             {EnemyType.Dodger, 0.01f},
             {EnemyType.Bumper, 0.8f},
-            {EnemyType.Shielded, 0.3f}
+            {EnemyType.Shielded, 0.5f}
         };
         
         private Dictionary<EnemyType, float> spawnChances = new Dictionary<EnemyType, float>()
@@ -39,7 +39,8 @@ namespace Enemy
             {EnemyType.Minion, 1.0f},
             {EnemyType.Walker, 1.0f},
             {EnemyType.Dodger, 1.0f},
-            {EnemyType.Bumper, 1.0f}
+            {EnemyType.Bumper, 1.0f},
+            {EnemyType.Shielded, 1.0f}
         };
 
         private void Start()
@@ -72,6 +73,7 @@ namespace Enemy
                     spawnChances[EnemyType.Walker] = spawnChancesEasy[EnemyType.Walker];
                     spawnChances[EnemyType.Dodger] = spawnChancesEasy[EnemyType.Dodger];
                     spawnChances[EnemyType.Bumper] = spawnChancesEasy[EnemyType.Bumper];
+                    spawnChances[EnemyType.Shielded] = spawnChancesEasy[EnemyType.Shielded];
                     break;
                 }
                 case DifficultyController.Difficulty.Normal:
@@ -81,6 +83,7 @@ namespace Enemy
                     spawnChances[EnemyType.Walker] = spawnChancesEasy[EnemyType.Walker] / 1.5f;
                     spawnChances[EnemyType.Dodger] = spawnChancesEasy[EnemyType.Dodger] * 5;
                     spawnChances[EnemyType.Bumper] = spawnChancesEasy[EnemyType.Bumper] / 1.5f;
+                    spawnChances[EnemyType.Shielded] = spawnChancesEasy[EnemyType.Shielded] * 1.5f;
                     break;
                 }
                 case DifficultyController.Difficulty.Hard:
@@ -90,6 +93,7 @@ namespace Enemy
                     spawnChances[EnemyType.Walker] = spawnChancesEasy[EnemyType.Walker] / 2.0f;
                     spawnChances[EnemyType.Dodger] = spawnChancesEasy[EnemyType.Dodger] * 15;
                     spawnChances[EnemyType.Bumper] = spawnChancesEasy[EnemyType.Bumper] / 2.0f;
+                    spawnChances[EnemyType.Shielded] = spawnChancesEasy[EnemyType.Shielded] * 2;
                     break;
                 }
                 case DifficultyController.Difficulty.VeryHard:
@@ -99,6 +103,7 @@ namespace Enemy
                     spawnChances[EnemyType.Walker] = spawnChancesEasy[EnemyType.Walker];
                     spawnChances[EnemyType.Dodger] = spawnChancesEasy[EnemyType.Dodger] * 50;
                     spawnChances[EnemyType.Bumper] = spawnChancesEasy[EnemyType.Bumper];
+                    spawnChances[EnemyType.Shielded] = spawnChancesEasy[EnemyType.Shielded] *2;
                     break;
                 }
                 case DifficultyController.Difficulty.Impossible:
@@ -108,6 +113,7 @@ namespace Enemy
                     spawnChances[EnemyType.Walker] = spawnChancesEasy[EnemyType.Walker] * 2;
                     spawnChances[EnemyType.Dodger] = spawnChancesEasy[EnemyType.Dodger] * 200;
                     spawnChances[EnemyType.Bumper] = spawnChancesEasy[EnemyType.Bumper];
+                    spawnChances[EnemyType.Shielded] = spawnChancesEasy[EnemyType.Shielded] * 5;
                     break;
                 }
             }
