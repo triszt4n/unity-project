@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Xml.Serialization;
+using Enemy;
 using Unity.Collections;
 using UnityEngine;
 
@@ -158,9 +159,10 @@ public class PlayerController : MonoBehaviour
         var destroyableColliders = Physics2D.OverlapCircleAll(where, howBig);
         foreach (var toDestroyCollider in destroyableColliders)
         {
-            if (toDestroyCollider.gameObject.CompareTag("Enemy"))
+            var enemyController = toDestroyCollider.gameObject.GetComponent<AbstractEnemy>();
+            if (toDestroyCollider.gameObject.CompareTag("Enemy") && enemyController!= null)
             {
-                Destroy(toDestroyCollider.gameObject);
+                enemyController.InitiateDestroy();
             }
         }
     }

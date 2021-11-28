@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Enemy;
 using UnityEngine;
 
 public class GateController : MonoBehaviour
@@ -28,9 +29,10 @@ public class GateController : MonoBehaviour
         var destroyableColliders = Physics2D.OverlapCircleAll(where, howBig);
         foreach (var toDestroyCollider in destroyableColliders)
         {
-            if (toDestroyCollider.gameObject.CompareTag("Enemy"))
+            var enemyController = toDestroyCollider.gameObject.GetComponent<AbstractEnemy>();
+            if (toDestroyCollider.gameObject.CompareTag("Enemy") && enemyController!= null)
             {
-                Destroy(toDestroyCollider.gameObject);
+                enemyController.InitiateDestroy();
             }
         }
     }
