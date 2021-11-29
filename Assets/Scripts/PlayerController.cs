@@ -8,6 +8,7 @@ using Enemy;
 using Unity.Collections;
 using UnityEngine;
 using EZCameraShake;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class PlayerController : MonoBehaviour
     public GameObject explosionPrefab;
     public HealthBar hpBar;
     public ScoreController scoreController;
+    public DeathMenuController deathMenuController;
+    
     public DateTime lastCollision = DateTime.MinValue;
     public int invulnaribilityMillis = 1500;
     public float damageExplosionRadius = 40f;
@@ -28,12 +31,11 @@ public class PlayerController : MonoBehaviour
     public int scoresPerSecond = 10;
 
     public bool hasShield = false;
-
-    public DeathMenu deathMenu;
     
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         playerRb = gameObject.GetComponent<Rigidbody2D>();
         UpdateHealthUI();
         InvokeRepeating(nameof(AddScoreWhileAlive), 0.0f, 1.0f);
@@ -124,8 +126,7 @@ public class PlayerController : MonoBehaviour
             // Do die logic if health <= 0
             StopAddScore();
             Time.timeScale = 0;
-            int score = scoreController.CurrentScore;
-            deathMenu.ToggleEndMenu(this);
+            deathMenuController.ToggleEndMenu();
             health = 0;
         }
         Explode(gameObject.transform.position, damageExplosionRadius);
@@ -181,6 +182,13 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1;
         scoreController.HalfScore();
         health = 2;
+        UpdateHealthUI();
+    }
+
+    public void QuitGame()
+    {
+        SaveGame();
+        SceneManager.LoadScene("Scenes/MainMenuScene");
     }
 
 }
