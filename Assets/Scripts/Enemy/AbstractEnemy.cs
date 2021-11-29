@@ -25,14 +25,18 @@ namespace Enemy
            
             scoreController.AddScore(worthIfShot);
             Destroy(other.gameObject);
-            InitiateDestroy();
+            InitiateDestroy(true);
         }
 
-        public void InitiateDestroy()
+        public void InitiateDestroy(Boolean playSound = false)
         {
             if (debris != null)
             {
                 var debrisController = Instantiate(debris, transform.position, transform.rotation);
+                if (!playSound)
+                {
+                    debrisController.GetComponent<AudioSource>().volume = 0;
+                }
                 debrisController.gameObject.transform.position += Vector3.forward; // put debris in background
             }
             Destroy(gameObject);

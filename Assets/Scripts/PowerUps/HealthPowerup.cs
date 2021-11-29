@@ -1,27 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using PowerUps;
 using UnityEngine;
 
-public class HealthPowerup : MonoBehaviour
+
+
+public class HealthPowerup : AbstractPowerup
 {
-
-    public void OnTriggerEnter2D(Collider2D other)
+    protected override bool TryApplyEffect(GameObject playerObject)
     {
-        if (!other.gameObject.CompareTag("Player")) return;
-        var player = other.gameObject.GetComponent<PlayerController>();
-
-        if (player.health < player.maxHealth)
-        {
-           ApplyEffect(player);
-        }
-    }
-
-    private void ApplyEffect(PlayerController player)
-    {
-        player.health++;
-        player.UpdateHealthUI();
-        Destroy(gameObject);
+        var player = playerObject.GetComponent<PlayerController>();
+        //apply effect
+        return player.health < player.maxHealth && player.TryHeal();
+        
     }
 }
 

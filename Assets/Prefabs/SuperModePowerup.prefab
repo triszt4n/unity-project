@@ -112,5 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9271617afca326f4d973f444a8ef1504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickupSound: {fileID: 8300000, guid: e157d8c7fe1c3c64c912271f5c63885f, type: 3}
   superModeDuration: 5
+  moveMultiplier: 1.5
   icon: {fileID: 621560852509794982, guid: 6c1bba5b8b56494459b3fcf0447ad5a5, type: 3}
