@@ -207,9 +207,10 @@ public class PlayerController : MonoBehaviour
         StartAddScore();
     }
 
-    public void QuitGame()
+    public void QuitGame(Boolean doSaveGame = true)
     {
-        SaveGame();
+        if (doSaveGame)
+            SaveGame();
         SceneManager.LoadScene("Scenes/MainMenuScene");
     }
 
