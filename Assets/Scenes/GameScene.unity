@@ -916,11 +916,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthPrefab: {fileID: 2407059588809738070, guid: ccbebc1048567a447b8ccd2bf2a2b5c4, type: 3}
   hologramPickupPrefab: {fileID: 5927605600873826909, guid: 42017469155001a4084283756154e8eb, type: 3}
-  hologramShipPrefab: {fileID: 3650996231795725233, guid: 41f47d41e502e7849910291e8b1e9163, type: 3}
   shieldPrefab: {fileID: 2387588437133553504, guid: 447a7e632c6f0c44cbbb29ac0d5d83a5, type: 3}
   gatePrefab: {fileID: 3718171198719618835, guid: 9c7884745c619424b99f4974010e15d1, type: 3}
   superModePrefab: {fileID: 1554330984125595188, guid: 10ebe2aa8319f7048b9c58e2ac36cd6e, type: 3}
-  explosionPrefab: {fileID: 516489693114719762, guid: 98d379976d0200247be695a72880e69b, type: 3}
   spawnTimeSpanStart: 2
   spawnTimeSpanEnd: 5
 --- !u!1 &352581855
@@ -1174,6 +1172,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 643144440}
+  - component: {fileID: 643144441}
   m_Layer: 0
   m_Name: Camera Holder
   m_TagString: Untagged
@@ -1196,6 +1195,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &643144441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643144439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd97bb1e2508e94e8050918f3defb75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeOffset: 10
+  leftLimit: -44
+  rightLimit: 44
+  topLimit: 23
+  bottomLimit: -23
 --- !u!1 &661401318
 GameObject:
   m_ObjectHideFlags: 0
@@ -2881,7 +2897,6 @@ GameObject:
   - component: {fileID: 2102875610}
   - component: {fileID: 2102875609}
   - component: {fileID: 2102875608}
-  - component: {fileID: 2102875611}
   - component: {fileID: 2102875612}
   m_Layer: 0
   m_Name: Main Camera
@@ -2955,23 +2970,6 @@ Transform:
   m_Father: {fileID: 643144440}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2102875611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2102875607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bd97bb1e2508e94e8050918f3defb75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeOffset: 10
-  leftLimit: -44
-  rightLimit: 44
-  topLimit: 23
-  bottomLimit: -23
 --- !u!114 &2102875612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2979,7 +2977,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2102875607}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ab8353b5ebd32545867da143199a814, type: 3}
   m_Name: 
