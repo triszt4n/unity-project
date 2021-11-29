@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb6627c84f2ae7449c8b295f24f546a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickupSound: {fileID: 8300000, guid: cbbc00cb47ac0654aadac129f5592961, type: 3}
   hologramDuration: 15
   hologramPrefab: {fileID: 3650996231795725233, guid: 41f47d41e502e7849910291e8b1e9163, type: 3}
   icon: {fileID: 3410918491446568398, guid: 6c1bba5b8b56494459b3fcf0447ad5a5, type: 3}

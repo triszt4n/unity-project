@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class HologramController : MonoBehaviour
 {
     private class PlayerState
@@ -25,12 +26,14 @@ public class HologramController : MonoBehaviour
     public float shootInterval = 0.8f;
 
     private Queue<PlayerState> playerStates;
+    private AudioSource shootSource;
 
     private bool isLoading;
 
     // Start is called before the first frame update
     void Start()
     {
+        shootSource = gameObject.GetComponent<AudioSource>();
         playerStates = new Queue<PlayerState>();
         StartCoroutine(LoadPositions(followTime));
         InvokeRepeating(nameof(Shoot), followTime, shootInterval);
@@ -55,6 +58,7 @@ public class HologramController : MonoBehaviour
         var liftVector = new Vector3(0, 0, 0.1f);
         Instantiate(bulletPrefab, leftFirePoint.position + liftVector, leftFirePoint.rotation);
         Instantiate(bulletPrefab, rightFirePoint.position + liftVector, rightFirePoint.rotation);
+        shootSource.Play();
     }
 
     IEnumerator LoadPositions(float time)

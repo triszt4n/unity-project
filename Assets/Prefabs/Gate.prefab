@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf3e1e58203ba1a40aca56fce82ef419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionPrefab: {fileID: 516489693114719762, guid: 98d379976d0200247be695a72880e69b, type: 3}
+  explosionPrefab: {fileID: 516489693114719762, guid: 65021aff471306440912c2e3a96bc76e, type: 3}
   radius: 10
   rotationSpeed: 30
 --- !u!1 &4126247485998425819

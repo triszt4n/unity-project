@@ -10,9 +10,12 @@ using UnityEngine;
 using EZCameraShake;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))]
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D playerRb;
+    private AudioSource shootSource;
     public Camera mainCamera;
     public Transform rightFirePoint;
     public Transform leftFirePoint;
@@ -31,12 +34,13 @@ public class PlayerController : MonoBehaviour
     public int scoresPerSecond = 10;
 
     public bool hasShield = false;
-    
+
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1;
         playerRb = gameObject.GetComponent<Rigidbody2D>();
+        shootSource = gameObject.GetComponent<AudioSource>();
         UpdateHealthUI();
         StartAddScore();
     }
@@ -44,11 +48,11 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 movement;
     private Vector2 mousePos;
-    
+
     public float moveSpeed = 10f;
     public int millisBetweenShots = 200;
     private DateTime lastShot = DateTime.Now;
-    
+
     private bool shootStarted = false;
 
     // Update is called once per frame
@@ -89,13 +93,13 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         playerRb.MovePosition(playerRb.position + movement * moveSpeed * Time.fixedDeltaTime);
-        
+
         // Setting lookDir at mouse
         Vector2 lookDir = mousePos - playerRb.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
         playerRb.rotation = angle;
     }
-    
+
     private void ShootIfStarted()
     {
         if (!shootStarted)
@@ -108,19 +112,19 @@ public class PlayerController : MonoBehaviour
             lastShot = DateTime.Now;
             Shoot();
         }
-        
     }
-    
+
     private void Shoot()
     {
         var liftVector = new Vector3(0, 0, 0.1f);
         Instantiate(bulletPrefab, leftFirePoint.position + liftVector, leftFirePoint.rotation);
         Instantiate(bulletPrefab, rightFirePoint.position + liftVector, rightFirePoint.rotation);
+        shootSource.Play();
     }
 
-    public void UpdateHealthUI()
+    private void UpdateHealthUI()
     {
-        hpBar.UpdateHealth((float)this.health / this.maxHealth);
+        hpBar.UpdateHealth((float) this.health / this.maxHealth);
     }
 
     public void TakeDamage()
@@ -135,8 +139,17 @@ public class PlayerController : MonoBehaviour
             deathMenuController.ToggleEndMenu();
             health = 0;
         }
+
         Explode(gameObject.transform.position, damageExplosionRadius);
         UpdateHealthUI();
+    }
+
+    public bool TryHeal()
+    {
+        if (health >= maxHealth) return false;
+        health++;
+        UpdateHealthUI();
+        return true;
     }
 
     public void SaveGame()
@@ -151,6 +164,7 @@ public class PlayerController : MonoBehaviour
             highScores = xmlSerializer.Deserialize(fileContent) as List<MenuController.HighScore>;
             fileContent.Close();
         }
+
         fileContent = File.Open(fileName, FileMode.Create);
         highScores ??= new List<MenuController.HighScore>();
         highScores.Add(
@@ -168,7 +182,7 @@ public class PlayerController : MonoBehaviour
     {
         SaveGame();
     }
-    
+
     private void Explode(Vector2 where, float howBig)
     {
         CameraShaker.Instance.ShakeOnce(4.0f, 4.0f, 0.1f, 1.0f);
@@ -177,7 +191,7 @@ public class PlayerController : MonoBehaviour
         foreach (var toDestroyCollider in destroyableColliders)
         {
             var enemyController = toDestroyCollider.gameObject.GetComponent<AbstractEnemy>();
-            if (toDestroyCollider.gameObject.CompareTag("Enemy") && enemyController!= null)
+            if (toDestroyCollider.gameObject.CompareTag("Enemy") && enemyController != null)
             {
                 enemyController.InitiateDestroy();
             }
