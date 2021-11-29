@@ -7,6 +7,9 @@ namespace PowerUps
     public abstract class AbstractPowerup : MonoBehaviour
     {
         public AudioClip pickupSound;
+
+        [Range(0.0f, 1.0f)]
+        public float pickupSoundVolume = 1.0f;
         
         //returns if application is successful
         protected abstract bool TryApplyEffect(GameObject playerObject);
@@ -20,7 +23,7 @@ namespace PowerUps
             
             // if there is a playable audio play it
             var powerUpPlayer = other.gameObject.GetComponent<AudioSource>();
-            if (powerUpPlayer != null && pickupSound != null) powerUpPlayer.PlayOneShot(pickupSound,1.0f);
+            if (powerUpPlayer != null && pickupSound != null) powerUpPlayer.PlayOneShot(pickupSound,pickupSoundVolume);
             
             Destroy(gameObject);
         }
