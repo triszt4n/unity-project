@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Enemy;
+using EZCameraShake;
 using UnityEngine;
 
 public class GateController : MonoBehaviour
@@ -24,13 +26,15 @@ public class GateController : MonoBehaviour
 
     private void Explode(Vector2 where, float howBig)
     {
+        CameraShaker.Instance.ShakeOnce(4.0f, 4.0f, 0.1f, 1.0f);
         Instantiate(explosionPrefab, where, explosionPrefab.transform.rotation);
         var destroyableColliders = Physics2D.OverlapCircleAll(where, howBig);
         foreach (var toDestroyCollider in destroyableColliders)
         {
-            if (toDestroyCollider.gameObject.CompareTag("Enemy"))
+            var enemyController = toDestroyCollider.gameObject.GetComponent<AbstractEnemy>();
+            if (toDestroyCollider.gameObject.CompareTag("Enemy") && enemyController!= null)
             {
-                Destroy(toDestroyCollider.gameObject);
+                enemyController.InitiateDestroy();
             }
         }
     }

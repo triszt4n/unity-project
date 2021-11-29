@@ -13,12 +13,15 @@ namespace Enemy
         public GameObject walkerPrefab;
         public GameObject bumperPrefab;
         public GameObject dodgerPrefab;
+        public GameObject shieldedPrefab;
         public GameObject player;
         public ScoreController scoreController;
         private DateTime nextEnemySpawnTime = DateTime.Now;
         public DifficultyController difficultyController;
-        private DifficultyController.Difficulty difficulty;
-        
+        private DifficultyController.Difficulty? difficulty;
+        public float spawnTimeSpanStart = 2.0f;
+        public float spawnTimeSpanEnd = 5.0f; 
+
         // Add Group spawning support
         private Dictionary<EnemyType, float> spawnChancesEasy = new Dictionary<EnemyType, float>()
         {
@@ -26,7 +29,8 @@ namespace Enemy
             {EnemyType.Minion, 0.3f},
             {EnemyType.Walker, 0.8f},
             {EnemyType.Dodger, 0.01f},
-            {EnemyType.Bumper, 0.8f}
+            {EnemyType.Bumper, 0.8f},
+            {EnemyType.Shielded, 0.5f}
         };
         
         private Dictionary<EnemyType, float> spawnChances = new Dictionary<EnemyType, float>()
@@ -35,13 +39,14 @@ namespace Enemy
             {EnemyType.Minion, 1.0f},
             {EnemyType.Walker, 1.0f},
             {EnemyType.Dodger, 1.0f},
-            {EnemyType.Bumper, 1.0f}
+            {EnemyType.Bumper, 1.0f},
+            {EnemyType.Shielded, 1.0f}
         };
 
         private void Start()
         {
-            nextEnemySpawnTime = DateTime.Now + TimeSpan.FromSeconds(2.0f);
-            difficulty = difficultyController.GetDifficulty();
+            nextEnemySpawnTime = DateTime.Now + TimeSpan.FromSeconds(Random.Range(spawnTimeSpanStart, spawnTimeSpanEnd));
+            difficulty = null;
             UpdateSpawnChancesForDifficulty();
         }
 
@@ -68,6 +73,7 @@ namespace Enemy
                     spawnChances[EnemyType.Walker] = spawnChancesEasy[EnemyType.Walker];
                     spawnChances[EnemyType.Dodger] = spawnChancesEasy[EnemyType.Dodger];
                     spawnChances[EnemyType.Bumper] = spawnChancesEasy[EnemyType.Bumper];
+                    spawnChances[EnemyType.Shielded] = spawnChancesEasy[EnemyType.Shielded];
                     break;
                 }
                 case DifficultyController.Difficulty.Normal:
@@ -77,6 +83,7 @@ namespace Enemy
                     spawnChances[EnemyType.Walker] = spawnChancesEasy[EnemyType.Walker] / 1.5f;
                     spawnChances[EnemyType.Dodger] = spawnChancesEasy[EnemyType.Dodger] * 5;
                     spawnChances[EnemyType.Bumper] = spawnChancesEasy[EnemyType.Bumper] / 1.5f;
+                    spawnChances[EnemyType.Shielded] = spawnChancesEasy[EnemyType.Shielded] * 1.5f;
                     break;
                 }
                 case DifficultyController.Difficulty.Hard:
@@ -86,6 +93,7 @@ namespace Enemy
                     spawnChances[EnemyType.Walker] = spawnChancesEasy[EnemyType.Walker] / 2.0f;
                     spawnChances[EnemyType.Dodger] = spawnChancesEasy[EnemyType.Dodger] * 15;
                     spawnChances[EnemyType.Bumper] = spawnChancesEasy[EnemyType.Bumper] / 2.0f;
+                    spawnChances[EnemyType.Shielded] = spawnChancesEasy[EnemyType.Shielded] * 2;
                     break;
                 }
                 case DifficultyController.Difficulty.VeryHard:
@@ -95,6 +103,7 @@ namespace Enemy
                     spawnChances[EnemyType.Walker] = spawnChancesEasy[EnemyType.Walker];
                     spawnChances[EnemyType.Dodger] = spawnChancesEasy[EnemyType.Dodger] * 50;
                     spawnChances[EnemyType.Bumper] = spawnChancesEasy[EnemyType.Bumper];
+                    spawnChances[EnemyType.Shielded] = spawnChancesEasy[EnemyType.Shielded] *2;
                     break;
                 }
                 case DifficultyController.Difficulty.Impossible:
@@ -104,8 +113,17 @@ namespace Enemy
                     spawnChances[EnemyType.Walker] = spawnChancesEasy[EnemyType.Walker] * 2;
                     spawnChances[EnemyType.Dodger] = spawnChancesEasy[EnemyType.Dodger] * 200;
                     spawnChances[EnemyType.Bumper] = spawnChancesEasy[EnemyType.Bumper];
+                    spawnChances[EnemyType.Shielded] = spawnChancesEasy[EnemyType.Shielded] * 5;
                     break;
                 }
+                default:
+                    spawnChances[EnemyType.Snitch] = spawnChancesEasy[EnemyType.Snitch];
+                    spawnChances[EnemyType.Minion] = spawnChancesEasy[EnemyType.Minion];
+                    spawnChances[EnemyType.Walker] = spawnChancesEasy[EnemyType.Walker];
+                    spawnChances[EnemyType.Dodger] = spawnChancesEasy[EnemyType.Dodger];
+                    spawnChances[EnemyType.Bumper] = spawnChancesEasy[EnemyType.Bumper];
+                    spawnChances[EnemyType.Shielded] = spawnChancesEasy[EnemyType.Shielded];
+                    break;
             }
         }
 
@@ -113,7 +131,7 @@ namespace Enemy
         {
             if (DateTime.Now >= nextEnemySpawnTime)
             {
-                nextEnemySpawnTime = DateTime.Now + TimeSpan.FromSeconds(1.0f + Random.Range(0.0f, 2.0f));
+                nextEnemySpawnTime = DateTime.Now + TimeSpan.FromSeconds(Random.Range(spawnTimeSpanStart, spawnTimeSpanEnd));
                 List<EnemyType> enemyTypesToSpawn = GenerateNextEnemyTypes();
                 GameObject enemy = null;
                 foreach (EnemyType enemyType in enemyTypesToSpawn)
@@ -125,6 +143,14 @@ namespace Enemy
                     {
                         switch (enemyType)
                         {
+
+                            case EnemyType.Shielded:
+                            {
+                                enemy  = Instantiate(shieldedPrefab, GenerateEnemyStartingPosition(),
+                                    Quaternion.Euler(0, 0, 0));
+                                enemy.GetComponent<ShieldedBumperController>().player = player;
+                                break;
+                            }
                             case EnemyType.Snitch:
                             {
                                 var snitch = Instantiate(snitchPrefab, GenerateEnemyStartingPosition(),

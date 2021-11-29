@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5571415391136649031}
   - component: {fileID: 8313900899165399261}
   - component: {fileID: 7179482355092267351}
-  - component: {fileID: 6835233022336167960}
+  - component: {fileID: 2245541020021823619}
   m_Layer: 0
   m_Name: Dodger
   m_TagString: Enemy
@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worthIfShot: 50
+  debris: {fileID: 6613368218360990993, guid: 80ec913e11d7c174e9d8af4670295c99, type: 3}
   scoreController: {fileID: 0}
   chaseSpeed: 5
   dodgeSpeed: 10
@@ -144,8 +145,8 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!60 &6835233022336167960
-PolygonCollider2D:
+--- !u!70 &2245541020021823619
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -157,30 +158,6 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.4, y: 0.4}
-    newSize: {x: 5.12, y: 5.12}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.19, y: 0.07}
-      - {x: 0.17, y: 0.14}
-      - {x: 0.14, y: 0.17999999}
-      - {x: 0.07, y: 0.19}
-      - {x: -0.07, y: 0.19}
-      - {x: -0.13, y: 0.17}
-      - {x: -0.17999999, y: 0.14}
-      - {x: -0.19, y: 0.07}
-      - {x: -0.19, y: -0.11}
-      - {x: -0.17999999, y: -0.14}
-      - {x: -0.11, y: -0.19}
-      - {x: 0.08, y: -0.19}
-      - {x: 0.13, y: -0.17}
-      - {x: 0.17, y: -0.13}
-      - {x: 0.19, y: -0.08}
+  m_Offset: {x: 0.0014083326, y: -0.04092547}
+  m_Size: {x: 0.14413857, y: 0.28299436}
+  m_Direction: 0
