@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 using Enemy;
 using Unity.Collections;
 using UnityEngine;
+using EZCameraShake;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(AudioSource))]
@@ -169,6 +170,7 @@ public class PlayerController : MonoBehaviour
 
     private void Explode(Vector2 where, float howBig)
     {
+        CameraShaker.Instance.ShakeOnce(4.0f, 4.0f, 0.1f, 1.0f);
         Instantiate(explosionPrefab, where, explosionPrefab.transform.rotation);
         var destroyableColliders = Physics2D.OverlapCircleAll(where, howBig);
         foreach (var toDestroyCollider in destroyableColliders)
