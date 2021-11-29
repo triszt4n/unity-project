@@ -919,8 +919,10 @@ MonoBehaviour:
   shieldPrefab: {fileID: 2387588437133553504, guid: 447a7e632c6f0c44cbbb29ac0d5d83a5, type: 3}
   gatePrefab: {fileID: 3718171198719618835, guid: 9c7884745c619424b99f4974010e15d1, type: 3}
   superModePrefab: {fileID: 1554330984125595188, guid: 10ebe2aa8319f7048b9c58e2ac36cd6e, type: 3}
+  difficultyController: {fileID: 306001011}
   spawnTimeSpanStart: 2
   spawnTimeSpanEnd: 5
+  aliveTimeEasyMillis: 60000
 --- !u!1 &352581855
 GameObject:
   m_ObjectHideFlags: 0
