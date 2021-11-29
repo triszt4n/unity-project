@@ -40,6 +40,7 @@ public class MenuController : MonoBehaviour
             }
             newValue = (maxHighScore / 2).ToString();
             continueButtonObject.GetComponent<Button>().interactable = true;
+            fileContent.Close();
         }
         else
         {

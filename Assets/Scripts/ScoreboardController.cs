@@ -20,6 +20,7 @@ public class ScoreboardController : MonoBehaviour
         var fileContent = File.Open(fileName, FileMode.Open);        
         var xmlSerializer = new XmlSerializer(typeof(List<MenuController.HighScore>));
         var highScores = xmlSerializer.Deserialize(fileContent) as List<MenuController.HighScore>;
+        fileContent.Close();
         if (highScores == null) return;
 
         foreach (var highScore in highScores)

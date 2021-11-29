@@ -268,5 +268,15 @@ namespace Enemy
 
             return toReturn;
         }
+
+        public void StopGeneration()
+        {
+            nextEnemySpawnTime = DateTime.MaxValue;
+        }
+
+        public void StartGeneration()
+        {
+            nextEnemySpawnTime = DateTime.Now + TimeSpan.FromSeconds(Random.Range(spawnTimeSpanStart, spawnTimeSpanEnd));
+        }
     }
 }

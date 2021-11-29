@@ -8,6 +8,7 @@ using Enemy;
 using Unity.Collections;
 using UnityEngine;
 using EZCameraShake;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(AudioSource))]
@@ -22,6 +23,8 @@ public class PlayerController : MonoBehaviour
     public GameObject explosionPrefab;
     public HealthBar hpBar;
     public ScoreController scoreController;
+    public DeathMenuController deathMenuController;
+    
     public DateTime lastCollision = DateTime.MinValue;
     public int invulnaribilityMillis = 1500;
     public float damageExplosionRadius = 40f;
@@ -35,11 +38,13 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         playerRb = gameObject.GetComponent<Rigidbody2D>();
         shootSource = gameObject.GetComponent<AudioSource>();
         UpdateHealthUI();
-        InvokeRepeating(nameof(AddScoreWhileAlive), 0.0f, 1.0f);
+        StartAddScore();
     }
+
 
     private Vector2 movement;
     private Vector2 mousePos;
@@ -77,6 +82,11 @@ public class PlayerController : MonoBehaviour
     void StopAddScore()
     {
         CancelInvoke(nameof(AddScoreWhileAlive));
+    }
+
+    void StartAddScore()
+    {
+        InvokeRepeating(nameof(AddScoreWhileAlive), 1.0f, 1.0f);
     }
 
     // src: https://www.youtube.com/watch?v=LNLVOjbrQj4&t=207s
@@ -123,6 +133,10 @@ public class PlayerController : MonoBehaviour
         if (health <= 0)
         {
             // Do die logic if health <= 0
+            StopAddScore();
+            Time.timeScale = 0;
+            SaveGame();
+            deathMenuController.ToggleEndMenu();
             health = 0;
         }
 
@@ -161,6 +175,7 @@ public class PlayerController : MonoBehaviour
             }
         );
         xmlSerializer.Serialize(fileContent, highScores);
+        fileContent.Close();
     }
 
     private void OnApplicationQuit()
@@ -182,4 +197,20 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    public void ContinueGame()
+    {
+        Time.timeScale = 1;
+        scoreController.HalfScore();
+        health = 2;
+        UpdateHealthUI();
+        StartAddScore();
+    }
+
+    public void QuitGame()
+    {
+        SaveGame();
+        SceneManager.LoadScene("Scenes/MainMenuScene");
+    }
+
 }
