@@ -116,5 +116,15 @@ namespace PowerUps
 
             return toReturn;
         }
+
+        public void StopGeneration()
+        {
+            nextSpawnTime = DateTime.MaxValue;
+        }
+
+        public void StartGeneration()
+        {
+            nextSpawnTime = DateTime.Now + TimeSpan.FromSeconds(Random.Range(spawnTimeSpanStart, spawnTimeSpanEnd));
+        }
     }   
 }

@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1;
         playerRb = gameObject.GetComponent<Rigidbody2D>();
         UpdateHealthUI();
-        InvokeRepeating(nameof(AddScoreWhileAlive), 0.0f, 1.0f);
+        StartAddScore();
     }
 
 
@@ -78,6 +78,11 @@ public class PlayerController : MonoBehaviour
     void StopAddScore()
     {
         CancelInvoke(nameof(AddScoreWhileAlive));
+    }
+
+    void StartAddScore()
+    {
+        InvokeRepeating(nameof(AddScoreWhileAlive), 1.0f, 1.0f);
     }
 
     // src: https://www.youtube.com/watch?v=LNLVOjbrQj4&t=207s
@@ -156,6 +161,7 @@ public class PlayerController : MonoBehaviour
             }
         );
         xmlSerializer.Serialize(fileContent, highScores);
+        fileContent.Close();
     }
 
     private void OnApplicationQuit()
@@ -184,6 +190,7 @@ public class PlayerController : MonoBehaviour
         scoreController.HalfScore();
         health = 2;
         UpdateHealthUI();
+        StartAddScore();
     }
 
     public void QuitGame()

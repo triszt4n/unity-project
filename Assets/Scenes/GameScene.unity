@@ -2316,6 +2316,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 661401321}
+  enemySpawner: {fileID: 306001008}
+  powerUpSpawner: {fileID: 306001012}
 --- !u!1 &1438665302
 GameObject:
   m_ObjectHideFlags: 0
