@@ -126,6 +126,7 @@ public class PlayerController : MonoBehaviour
             // Do die logic if health <= 0
             StopAddScore();
             Time.timeScale = 0;
+            SaveGame();
             deathMenuController.ToggleEndMenu();
             health = 0;
         }
