@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -13,10 +15,13 @@ namespace PowerUps
         public GameObject shieldPrefab;
         public GameObject gatePrefab;
         public GameObject superModePrefab;
+        public DifficultyController difficultyController;
         public float spawnTimeSpanStart = 2.0f;
         public float spawnTimeSpanEnd = 5.0f;
         private DateTime nextSpawnTime = DateTime.Now;
         private Camera cam;
+        public int aliveTimeEasyMillis = 60_000;
+        private int aliveTimeMillis = 0;
 
         // Add Group spawning support
         private Dictionary<PowerUpType, double> spawnChances = new Dictionary<PowerUpType, double>()
@@ -27,16 +32,42 @@ namespace PowerUps
             {PowerUpType.Shield, 0.7},
             {PowerUpType.SuperMode, 0.1}
         };
+
+        private void UpdateAliveTime()
+        {
+            switch (difficultyController.GetDifficulty())
+            {
+                case DifficultyController.Difficulty.Easy:
+                    aliveTimeMillis = aliveTimeEasyMillis;
+                    break;
+                case DifficultyController.Difficulty.Normal:
+                    aliveTimeMillis = (int) Math.Round(aliveTimeEasyMillis * 0.85);
+                    break;
+                case DifficultyController.Difficulty.Hard:
+                    aliveTimeMillis = (int) Math.Round(aliveTimeEasyMillis * 0.75);
+                    break;
+                case DifficultyController.Difficulty.VeryHard:
+                    aliveTimeMillis = (int) Math.Round(aliveTimeEasyMillis * 0.65);
+                    break;
+                case DifficultyController.Difficulty.Impossible:
+                    aliveTimeMillis = (int) Math.Round(aliveTimeEasyMillis * 0.5);
+                    break;
+                default: 
+                    aliveTimeMillis = aliveTimeEasyMillis;
+                    break;
+            }
+        }
         
         private void Start()
         {
             nextSpawnTime = DateTime.Now + TimeSpan.FromSeconds(Random.Range(spawnTimeSpanStart, spawnTimeSpanEnd));
             cam = Camera.main;
+            UpdateAliveTime();
         }
 
         private void Update()
         {
-
+            UpdateAliveTime();
             if (DateTime.Now >= nextSpawnTime)
             {
                 nextSpawnTime =
@@ -44,24 +75,26 @@ namespace PowerUps
                 var toGenerate = GenerateNextPowerUpTypes();
                 foreach (PowerUpType powerUpType in toGenerate)
                 {
+                    GameObject powerUp = null;
                     switch (powerUpType)
                     {
                         case PowerUpType.Gate:
-                            Instantiate(gatePrefab, GeneratePowerUpStartingPosition(), Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f)));
+                            powerUp = Instantiate(gatePrefab, GeneratePowerUpStartingPosition(), Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f)));
                             break;
                         case PowerUpType.Health:
-                            Instantiate(healthPrefab, GeneratePowerUpStartingPosition(), Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f)));
+                            powerUp = Instantiate(healthPrefab, GeneratePowerUpStartingPosition(), Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f)));
                             break;
                         case PowerUpType.Hologram:
-                            Instantiate(hologramPickupPrefab, GeneratePowerUpStartingPosition(), Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f)));
+                            powerUp = Instantiate(hologramPickupPrefab, GeneratePowerUpStartingPosition(), Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f)));
                             break;
                         case PowerUpType.Shield:
-                            Instantiate(shieldPrefab, GeneratePowerUpStartingPosition(), Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f)));
+                            powerUp = Instantiate(shieldPrefab, GeneratePowerUpStartingPosition(), Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f)));
                             break;
                         case PowerUpType.SuperMode:
-                            Instantiate(superModePrefab, GeneratePowerUpStartingPosition(), Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f)));
+                            powerUp = Instantiate(superModePrefab, GeneratePowerUpStartingPosition(), Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f)));
                             break;
                     }
+                    Destroy(powerUp, aliveTimeMillis / 1000.0f);
                 }
             }
         }
