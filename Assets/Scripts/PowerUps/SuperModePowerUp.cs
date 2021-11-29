@@ -3,24 +3,19 @@ using System.Collections.Generic;
 using PowerUps;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
-public class SuperModePowerUp : MonoBehaviour
+
+public class SuperModePowerUp : AbstractPowerup
 {
     public float superModeDuration = 5f;
     public float moveMultiplier = 1.5f;
 
     public Sprite icon;
-    
-    public void OnTriggerEnter2D(Collider2D other)
+
+
+    protected override bool TryApplyEffect(GameObject playerObject)
     {
-        if(!other.gameObject.CompareTag("Player")) return;
-
-        var powerUpController = other.gameObject.GetComponent<TemporaryPowerUpController>();
-
-        if (powerUpController.AddPowerUp(new SuperModePowerUpPayload(superModeDuration,moveMultiplier),icon))
-        {
-            Destroy(gameObject);
-        }
-
+        var powerUpController = playerObject.GetComponent<TemporaryPowerUpController>();
+        
+        return  powerUpController.AddPowerUp(new SuperModePowerUpPayload(superModeDuration, moveMultiplier), icon);
     }
 }

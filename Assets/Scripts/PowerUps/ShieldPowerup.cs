@@ -4,24 +4,17 @@ using System.Collections.Generic;
 using PowerUps;
 using UnityEngine;
 
-
-[RequireComponent(typeof(Collider2D))]
-public class ShieldPowerup : MonoBehaviour
+public class ShieldPowerup : AbstractPowerup
 {
     public float shieldDuration = 5f;
-
     public Sprite icon;
-    
-    public void OnTriggerEnter2D(Collider2D other)
+
+
+    protected override bool TryApplyEffect(GameObject playerObject)
     {
-        if(!other.gameObject.CompareTag("Player")) return;
+        var powerUpController = playerObject.GetComponent<TemporaryPowerUpController>();
 
-        var powerUpController = other.gameObject.GetComponent<TemporaryPowerUpController>();
-
-        if (powerUpController.AddPowerUp(new ShieldPowerUpPayload(shieldDuration),icon))
-        {
-            Destroy(gameObject);
-        }
-
+        return powerUpController.AddPowerUp(new ShieldPowerUpPayload(shieldDuration), icon);
     }
+    
 }
