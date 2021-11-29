@@ -20,7 +20,8 @@ namespace Enemy
         public DifficultyController difficultyController;
         private DifficultyController.Difficulty? difficulty;
         public float spawnTimeSpanStart = 2.0f;
-        public float spawnTimeSpanEnd = 5.0f; 
+        public float spawnTimeSpanEnd = 5.0f;
+        public int difficultyEasyMaxTotalEnemies = 25;
 
         // Add Group spawning support
         private Dictionary<EnemyType, float> spawnChancesEasy = new Dictionary<EnemyType, float>()
@@ -32,7 +33,7 @@ namespace Enemy
             {EnemyType.Bumper, 0.8f},
             {EnemyType.Shielded, 0.5f}
         };
-        
+
         private Dictionary<EnemyType, float> spawnChances = new Dictionary<EnemyType, float>()
         {
             {EnemyType.Snitch, 1.0f},
@@ -43,9 +44,23 @@ namespace Enemy
             {EnemyType.Shielded, 1.0f}
         };
 
+        public int MaxTotalEnemyCount(DifficultyController.Difficulty difficulty)
+        {
+            return difficulty switch
+            {
+                DifficultyController.Difficulty.Easy => difficultyEasyMaxTotalEnemies,
+                DifficultyController.Difficulty.Normal => difficultyEasyMaxTotalEnemies * 2,
+                DifficultyController.Difficulty.Hard => difficultyEasyMaxTotalEnemies * 3,
+                DifficultyController.Difficulty.VeryHard => difficultyEasyMaxTotalEnemies * 4,
+                DifficultyController.Difficulty.Impossible => difficultyEasyMaxTotalEnemies * 5,
+                _ => difficultyEasyMaxTotalEnemies
+            };
+        }
+
         private void Start()
         {
-            nextEnemySpawnTime = DateTime.Now + TimeSpan.FromSeconds(Random.Range(spawnTimeSpanStart, spawnTimeSpanEnd));
+            nextEnemySpawnTime =
+                DateTime.Now + TimeSpan.FromSeconds(Random.Range(spawnTimeSpanStart, spawnTimeSpanEnd));
             difficulty = null;
             UpdateSpawnChancesForDifficulty();
         }
@@ -62,6 +77,7 @@ namespace Enemy
             {
                 return;
             }
+
             difficulty = difficultyController.GetDifficulty();
 
             switch (difficultyController.GetDifficulty())
@@ -103,7 +119,7 @@ namespace Enemy
                     spawnChances[EnemyType.Walker] = spawnChancesEasy[EnemyType.Walker];
                     spawnChances[EnemyType.Dodger] = spawnChancesEasy[EnemyType.Dodger] * 50;
                     spawnChances[EnemyType.Bumper] = spawnChancesEasy[EnemyType.Bumper];
-                    spawnChances[EnemyType.Shielded] = spawnChancesEasy[EnemyType.Shielded] *2;
+                    spawnChances[EnemyType.Shielded] = spawnChancesEasy[EnemyType.Shielded] * 2;
                     break;
                 }
                 case DifficultyController.Difficulty.Impossible:
@@ -131,7 +147,14 @@ namespace Enemy
         {
             if (DateTime.Now >= nextEnemySpawnTime)
             {
-                nextEnemySpawnTime = DateTime.Now + TimeSpan.FromSeconds(Random.Range(spawnTimeSpanStart, spawnTimeSpanEnd));
+                nextEnemySpawnTime =
+                    DateTime.Now + TimeSpan.FromSeconds(Random.Range(spawnTimeSpanStart, spawnTimeSpanEnd));
+                if (GameObject.FindGameObjectsWithTag("Enemy").Length >
+                    MaxTotalEnemyCount(difficulty.GetValueOrDefault(DifficultyController.Difficulty.Easy)))
+                {
+                    return;
+                }
+
                 List<EnemyType> enemyTypesToSpawn = GenerateNextEnemyTypes();
                 GameObject enemy = null;
                 foreach (EnemyType enemyType in enemyTypesToSpawn)
@@ -143,10 +166,9 @@ namespace Enemy
                     {
                         switch (enemyType)
                         {
-
                             case EnemyType.Shielded:
                             {
-                                enemy  = Instantiate(shieldedPrefab, GenerateEnemyStartingPosition(),
+                                enemy = Instantiate(shieldedPrefab, GenerateEnemyStartingPosition(),
                                     Quaternion.Euler(0, 0, 0));
                                 enemy.GetComponent<ShieldedBumperController>().player = player;
                                 break;
@@ -207,7 +229,7 @@ namespace Enemy
                    -0.1 <= viewPointPoint.y &&
                    viewPointPoint.y <= 1.1;
         }
-        
+
         // place enemies in other places
         private Vector2 GenerateEnemyStartingPosition()
         {
@@ -219,6 +241,7 @@ namespace Enemy
             {
                 startPosition = new Vector2(Random.Range(-59, 59), Random.Range(-29, 29));
             }
+
             return startPosition;
         }
 
@@ -235,6 +258,7 @@ namespace Enemy
                         toReturn.Add(type);
                         chance--;
                     }
+
                     if (Random.value <= chance)
                     {
                         toReturn.Add(type);
