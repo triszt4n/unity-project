@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 using TMPro;
@@ -14,19 +15,14 @@ public class ScoreboardController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var fileName = Application.persistentDataPath + MenuController.SAVE_GAME_FILENAME;
-        if (!File.Exists(fileName)) return;
+        var repository = HighScoreRepository.Instance;
+        if (!repository.HasHighScore) return;
 
-        var fileContent = File.Open(fileName, FileMode.Open);        
-        var xmlSerializer = new XmlSerializer(typeof(List<MenuController.HighScore>));
-        var highScores = xmlSerializer.Deserialize(fileContent) as List<MenuController.HighScore>;
-        fileContent.Close();
-        if (highScores == null) return;
-
-        foreach (var highScore in highScores)
+        foreach (var highScore in repository.HighScoreList.OrderByDescending(h => h.score))
         {
-            textContent.text += $"{highScore.time}\t{highScore.score}\n";
+            textContent.text +=  $"{highScore.time}\t{highScore.score}\n";
         }
+        
     }
 
     public void CloseScoreboard()
