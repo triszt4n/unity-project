@@ -28,20 +28,20 @@ public class HighScoreRepository
 
 
     private List<HighScore> highScores;
-    private readonly string fileName;
+    private readonly string filePath;
 
     private HighScoreRepository()
     {
-        fileName = Application.persistentDataPath + SAVE_GAME_FILENAME;
+        filePath = Path.Combine(Application.persistentDataPath, SAVE_GAME_FILENAME);
         LoadHighScores();
     }
 
 
     private void LoadHighScores()
     {
-        if (File.Exists(fileName))
+        if (File.Exists(filePath))
         {
-            var fileContent = File.Open(fileName, FileMode.Open);
+            var fileContent = File.Open(filePath, FileMode.Open);
             var xmlSerializer = new XmlSerializer(typeof(List<HighScore>));
             highScores = xmlSerializer.Deserialize(fileContent) as List<HighScore>;
             fileContent.Close();
@@ -53,7 +53,7 @@ public class HighScoreRepository
     private void SaveHighScores()
     {
         var xmlSerializer = new XmlSerializer(typeof(List<HighScore>));
-        var fileContent = File.Open(fileName, FileMode.Create);
+        var fileContent = File.Open(filePath, FileMode.Create);
         xmlSerializer.Serialize(fileContent, highScores);
         fileContent.Close();
     }
