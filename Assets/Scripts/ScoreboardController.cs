@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 using TMPro;
@@ -17,7 +18,7 @@ public class ScoreboardController : MonoBehaviour
         var repository = HighScoreRepository.Instance;
         if (!repository.HasHighScore) return;
 
-        foreach (var highScore in repository.HighScoreList)
+        foreach (var highScore in repository.HighScoreList.OrderByDescending(h => h.score))
         {
             textContent.text +=  $"{highScore.time}\t{highScore.score}\n";
         }
