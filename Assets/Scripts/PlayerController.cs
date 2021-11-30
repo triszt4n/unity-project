@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1;
+        targetOrtho = mainCamera.orthographicSize;
         playerRb = gameObject.GetComponent<Rigidbody2D>();
         shootSource = gameObject.GetComponent<AudioSource>();
         UpdateHealthUI();
@@ -55,12 +56,24 @@ public class PlayerController : MonoBehaviour
     private DateTime lastShot = DateTime.Now;
 
     private bool shootStarted = false;
+    
+    public float zoomSpeed = 1;
+    private float targetOrtho;
+    public float minOrtho = 1.0f;
+    public float maxOrtho = 20.0f;
 
     // Update is called once per frame
     void Update()
     {
         movement.x = Input.GetAxis("Horizontal");
         movement.y = Input.GetAxis("Vertical");
+        
+        var scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll != 0.0f) {
+            targetOrtho -= scroll * zoomSpeed;
+            targetOrtho = Mathf.Clamp(targetOrtho, minOrtho, maxOrtho);
+        }
+        mainCamera.orthographicSize = Mathf.MoveTowards(mainCamera.orthographicSize, targetOrtho, zoomSpeed * Time.deltaTime);
 
         mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 

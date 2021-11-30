@@ -2081,6 +2081,9 @@ MonoBehaviour:
   hasShield: 0
   moveSpeed: 10
   millisBetweenShots: 200
+  zoomSpeed: 10
+  minOrtho: 5
+  maxOrtho: 18
 --- !u!61 &661401322
 BoxCollider2D:
   m_ObjectHideFlags: 0
