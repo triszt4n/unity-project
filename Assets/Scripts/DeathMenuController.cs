@@ -31,6 +31,6 @@ public class DeathMenuController : MonoBehaviour
 
     public void QuitPressed()
     {
-        player.QuitGame();
+        player.QuitGame(false);
     }
 }
