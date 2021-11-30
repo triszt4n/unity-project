@@ -214,7 +214,7 @@ MonoBehaviour:
   rightFirePoint: {fileID: 3650996231287216201}
   leftFirePoint: {fileID: 3650996231523310691}
   bulletPrefab: {fileID: 8961989152580806322, guid: 395aa4cc07c72e24eb5bbf724d625aa6, type: 3}
-  followTime: 0.22
+  followTime: 0.5
   shootInterval: 0.3
 --- !u!122 &7184967257768183391
 Halo:
