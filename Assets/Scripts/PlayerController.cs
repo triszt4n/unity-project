@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D playerRb;
     private AudioSource shootSource;
+
     public Camera mainCamera;
     public Transform rightFirePoint;
     public Transform leftFirePoint;
@@ -152,30 +153,13 @@ public class PlayerController : MonoBehaviour
         return true;
     }
 
-    public void SaveGame()
+    private void SaveGame()
     {
-        var fileName = Application.persistentDataPath + MenuController.SAVE_GAME_FILENAME;
-        List<MenuController.HighScore> highScores = null;
-        FileStream fileContent;
-        XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<MenuController.HighScore>));
-        if (File.Exists(fileName))
+        HighScoreRepository.Instance.AddScore(new HighScore()
         {
-            fileContent = File.Open(fileName, FileMode.Open);
-            highScores = xmlSerializer.Deserialize(fileContent) as List<MenuController.HighScore>;
-            fileContent.Close();
-        }
-
-        fileContent = File.Open(fileName, FileMode.Create);
-        highScores ??= new List<MenuController.HighScore>();
-        highScores.Add(
-            new MenuController.HighScore()
-            {
-                score = scoreController.CurrentScore,
-                time = DateTime.Now
-            }
-        );
-        xmlSerializer.Serialize(fileContent, highScores);
-        fileContent.Close();
+            score = scoreController.CurrentScore,
+            time = DateTime.Now
+        });
     }
 
     private void OnApplicationQuit()

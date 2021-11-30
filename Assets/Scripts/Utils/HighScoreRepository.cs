@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -57,6 +58,7 @@ public class HighScoreRepository
         fileContent.Close();
     }
 
+
     public HighScore HighScore
     {
         get
@@ -74,4 +76,6 @@ public class HighScoreRepository
         highScores.Add(hs);
         SaveHighScores();
     }
+
+    public List<HighScore> HighScoreList => highScores;
 }
