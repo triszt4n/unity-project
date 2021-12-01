@@ -199,7 +199,7 @@ public class PlayerController : MonoBehaviour
     {
         Time.timeScale = 1;
         scoreController.HalfScore();
-        health = 2;
+        health = maxHealth;
         UpdateHealthUI();
         StartAddScore();
     }

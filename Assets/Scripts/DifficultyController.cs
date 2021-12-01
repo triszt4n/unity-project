@@ -14,22 +14,22 @@ public class DifficultyController : MonoBehaviour
 
     public Difficulty GetDifficulty()
     {
-        if (scoreController.CurrentScore < 1500)
+        if (scoreController.CurrentScore < 3000)
         {
             return Difficulty.Easy;
         }
 
-        if (scoreController.CurrentScore < 3500)
+        if (scoreController.CurrentScore < 6000)
         {
             return Difficulty.Normal;
         }
 
-        if (scoreController.CurrentScore < 6000)
+        if (scoreController.CurrentScore < 10000)
         {
             return Difficulty.Hard;
         }
 
-        if (scoreController.CurrentScore < 10000)
+        if (scoreController.CurrentScore < 20000)
         {
             return Difficulty.VeryHard;
         }
