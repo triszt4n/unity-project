@@ -15,7 +15,7 @@ PlayerSettings:
   companyName: DefaultCompany
   productName: EntropyWars
   defaultCursor: {fileID: 2800000, guid: 0f0e5a993d983b44ea477af53981cbd2, type: 3}
-  cursorHotspot: {x: 45, y: 45}
+  cursorHotspot: {x: 25, y: 25}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1
