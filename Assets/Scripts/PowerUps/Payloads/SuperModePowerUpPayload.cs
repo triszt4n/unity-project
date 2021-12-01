@@ -8,6 +8,7 @@ namespace PowerUps
         private float moveMultiplier;
         private Color originalColor;
         private SpriteRenderer flameRenderer;
+        private Transform flameContainer;
 
         public SuperModePowerUpPayload(float duration, float moveMultiplier) : base(duration)
         {
@@ -22,12 +23,17 @@ namespace PowerUps
                 .FirstOrDefault(r => r.gameObject.CompareTag("Flame"));
 
             originalColor = flameRenderer.color;
-            flameRenderer.color = new Color(255,0,0);
+            flameRenderer.color = new Color(255, 0, 0);
+            flameContainer = flameRenderer.gameObject.transform.parent;
+            if (flameContainer != null)
+                flameContainer.localScale = new Vector3(1.5f, 1.5f, 1f);
             player.moveSpeed *= moveMultiplier;
         }
 
         protected override void onDetach(PlayerController player)
         {
+            if (flameContainer != null)
+                flameContainer.localScale = new Vector3(1f, 1f, 1f);
             flameRenderer.color = originalColor;
             player.moveSpeed /= moveMultiplier;
         }
