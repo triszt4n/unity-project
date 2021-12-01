@@ -13,10 +13,10 @@ public class TemporaryPowerUpController : MonoBehaviour
 
     private struct PowerUp
     {
-        public ITemporaryPowerUp payload;
+        public TemporaryPowerUp payload;
         public Sprite icon;
 
-        public PowerUp(ITemporaryPowerUp payload, Sprite icon)
+        public PowerUp(TemporaryPowerUp payload, Sprite icon)
         {
             this.payload = payload;
             this.icon = icon;
@@ -44,11 +44,13 @@ public class TemporaryPowerUpController : MonoBehaviour
             if (i < powerUpArray.Length)
             {
                 powerUpIconHolders[i].sprite = powerUpArray[i].icon;
+                powerUpIconHolders[i].preserveAspect = true;
                 powerUpIconHolders[i].color = Color.white;
             }
             else
             {
                 powerUpIconHolders[i].sprite = null;
+                powerUpIconHolders[i].preserveAspect = true;
                 powerUpIconHolders[i].color = Color.clear;
             }
         }
@@ -56,7 +58,7 @@ public class TemporaryPowerUpController : MonoBehaviour
     
     
     
-    public bool AddPowerUp(ITemporaryPowerUp payload, Sprite powerUpIcon)
+    public bool AddPowerUp(TemporaryPowerUp payload, Sprite powerUpIcon)
     {
         var powerUp = new PowerUp(payload, powerUpIcon);
         
@@ -79,12 +81,23 @@ public class TemporaryPowerUpController : MonoBehaviour
         }
     }
 
+    public void ResetFifo()
+    {
+        StopAllCoroutines();
+        foreach (var powerUp in powerUps)
+        {
+            powerUp.payload.OnDetach(player);
+        }
+        powerUps.Clear();
+        UpdateUI();
+    }
+    
     private IEnumerator ActivateNextPowerUp()
     {
         var powerUp = powerUps.Peek();
         UpdateUI();
         powerUp.payload.OnAttach(player);
-        yield return new WaitForSeconds(powerUp.payload.Duration());
+        yield return new WaitForSeconds(powerUp.payload.Duration);
         powerUp.payload.OnDetach(player);
         powerUps.Dequeue();
         UpdateUI();

@@ -2,36 +2,29 @@
 
 namespace PowerUps
 {
-    public class HologramPowerupPayload: ITemporaryPowerUp
+    public class HologramPowerupPayload : TemporaryPowerUp
     {
-
         private GameObject hologramPrefab;
         private GameObject hologramObject;
-        private float duration;
 
-        public HologramPowerupPayload(GameObject hologramPrefab, float duration)
+        public HologramPowerupPayload(float duration, GameObject hologramPrefab) : base(duration)
         {
             this.hologramPrefab = hologramPrefab;
-            this.duration = duration;
         }
 
-        public void OnAttach(PlayerController player)
+        protected override void onAttach(PlayerController player)
         {
             var gameObject = player.gameObject;
-            hologramObject = GameObject.Instantiate(hologramPrefab, gameObject.transform.position, hologramPrefab.transform.rotation);
+            hologramObject = GameObject.Instantiate(hologramPrefab, gameObject.transform.position,
+                hologramPrefab.transform.rotation);
 
             var hologramController = hologramObject.GetComponent<HologramController>();
             hologramController.player = gameObject;
         }
 
-        public void OnDetach(PlayerController player)
+        protected override void onDetach(PlayerController player)
         {
             GameObject.Destroy(hologramObject);
-        }
-
-        public float Duration()
-        {
-            return duration;
         }
     }
 }

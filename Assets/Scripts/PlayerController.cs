@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject.FindGameObjectWithTag("MenuMusic").GetComponent<MenuMusicController>().StopMusic();
+        GameObject.FindGameObjectWithTag("MenuMusic")?.GetComponent<MenuMusicController>()?.StopMusic();
         Time.timeScale = 1;
         targetOrtho = mainCamera.orthographicSize;
         playerRb = gameObject.GetComponent<Rigidbody2D>();
@@ -198,6 +198,7 @@ public class PlayerController : MonoBehaviour
 
     public void ContinueGame()
     {
+        GetComponent<TemporaryPowerUpController>()?.ResetFifo();
         Time.timeScale = 1;
         scoreController.HalfScore();
         health = maxHealth;

@@ -1,30 +1,29 @@
-﻿namespace PowerUps
+﻿using UnityEngine;
+
+namespace PowerUps
 {
-    public class ShieldPowerUpPayload : ITemporaryPowerUp
+    public class ShieldPowerUpPayload : TemporaryPowerUp
     {
+        private GameObject shieldPrefab;
+        private GameObject shieldObject;
 
-        private float duration;
-
-        public ShieldPowerUpPayload(float duration)
+        public ShieldPowerUpPayload(float duration, GameObject shieldPrefab) : base(duration)
         {
-            this.duration = duration;
+            this.shieldPrefab = shieldPrefab;
         }
 
-        public void OnAttach(PlayerController player)
+        protected override void onAttach(PlayerController player)
         {
+            shieldObject = GameObject.Instantiate(shieldPrefab, player.gameObject.transform.position,
+                player.gameObject.transform.rotation);
+            shieldObject.transform.parent = player.gameObject.transform;
             player.hasShield = true;
         }
 
-        public void OnDetach(PlayerController player)
+        protected override void onDetach(PlayerController player)
         {
             player.hasShield = false;
+            GameObject.Destroy(shieldObject);
         }
-        
-
-        public float Duration()
-        {
-            return duration;
-        }
-        
     }
 }

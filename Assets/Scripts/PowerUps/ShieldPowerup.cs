@@ -7,6 +7,7 @@ using UnityEngine;
 public class ShieldPowerup : AbstractPowerup
 {
     public float shieldDuration = 5f;
+    public GameObject shieldPrefab;
     public Sprite icon;
 
 
@@ -14,7 +15,7 @@ public class ShieldPowerup : AbstractPowerup
     {
         var powerUpController = playerObject.GetComponent<TemporaryPowerUpController>();
 
-        return powerUpController.AddPowerUp(new ShieldPowerUpPayload(shieldDuration), icon);
+        return powerUpController.AddPowerUp(new ShieldPowerUpPayload(shieldDuration,shieldPrefab), icon);
     }
     
 }

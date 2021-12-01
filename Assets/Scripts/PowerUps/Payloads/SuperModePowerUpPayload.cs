@@ -1,33 +1,41 @@
-﻿namespace PowerUps
+﻿using System.Linq;
+using UnityEngine;
+
+namespace PowerUps
 {
-    public class SuperModePowerUpPayload: ITemporaryPowerUp
+    public class SuperModePowerUpPayload : TemporaryPowerUp
     {
-
-        private float duration;
         private float moveMultiplier;
+        private Color originalColor;
+        private SpriteRenderer flameRenderer;
+        private Transform flameContainer;
 
-        public SuperModePowerUpPayload(float duration, float moveMultiplier)
+        public SuperModePowerUpPayload(float duration, float moveMultiplier) : base(duration)
         {
-            this.duration = duration;
             this.moveMultiplier = moveMultiplier;
         }
-    
 
-        public void OnAttach(PlayerController player)
+
+        protected override void onAttach(PlayerController player)
         {
-            player.hasShield = true;
+            flameRenderer = player.gameObject
+                .GetComponentsInChildren<SpriteRenderer>()
+                .FirstOrDefault(r => r.gameObject.CompareTag("Flame"));
+
+            originalColor = flameRenderer.color;
+            flameRenderer.color = new Color(255, 0, 0);
+            flameContainer = flameRenderer.gameObject.transform.parent;
+            if (flameContainer != null)
+                flameContainer.localScale = new Vector3(1.5f, 1.5f, 1f);
             player.moveSpeed *= moveMultiplier;
         }
 
-        public void OnDetach(PlayerController player)
+        protected override void onDetach(PlayerController player)
         {
-            player.hasShield = false;
+            if (flameContainer != null)
+                flameContainer.localScale = new Vector3(1f, 1f, 1f);
+            flameRenderer.color = originalColor;
             player.moveSpeed /= moveMultiplier;
-        }
-
-        public float Duration()
-        {
-            return duration;
         }
     }
 }

@@ -14,6 +14,6 @@ public class HologramPowerup : AbstractPowerup
     protected override bool TryApplyEffect(GameObject playerObject)
     {
         var powerUpController = playerObject.GetComponent<TemporaryPowerUpController>();
-        return powerUpController.AddPowerUp(new HologramPowerupPayload(hologramPrefab, hologramDuration), icon);
+        return powerUpController.AddPowerUp(new HologramPowerupPayload(hologramDuration, hologramPrefab), icon);
     }
 }

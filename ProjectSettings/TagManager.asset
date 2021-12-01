@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Bullet
   - MenuMusic
+  - Flame
   layers:
   - Default
   - TransparentFX
