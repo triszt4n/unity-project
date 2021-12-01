@@ -44,11 +44,13 @@ public class TemporaryPowerUpController : MonoBehaviour
             if (i < powerUpArray.Length)
             {
                 powerUpIconHolders[i].sprite = powerUpArray[i].icon;
+                powerUpIconHolders[i].preserveAspect = true;
                 powerUpIconHolders[i].color = Color.white;
             }
             else
             {
                 powerUpIconHolders[i].sprite = null;
+                powerUpIconHolders[i].preserveAspect = true;
                 powerUpIconHolders[i].color = Color.clear;
             }
         }
