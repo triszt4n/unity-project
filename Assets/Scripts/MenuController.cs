@@ -39,6 +39,7 @@ public class MenuController : MonoBehaviour
 
     public void Play()
     {
+        GameObject.FindGameObjectWithTag("MenuMusic").GetComponent<MenuMusicController>().StopMusic();
         ScoreController.startingScore = 0;
         SceneManager.LoadScene("Scenes/GameScene");
     }

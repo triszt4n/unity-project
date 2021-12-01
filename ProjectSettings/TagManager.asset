@@ -7,6 +7,8 @@ TagManager:
   - Projectile
   - Wall
   - Enemy
+  - Bullet
+  - MenuMusic
   layers:
   - Default
   - TransparentFX
