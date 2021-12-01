@@ -13,10 +13,10 @@ public class TemporaryPowerUpController : MonoBehaviour
 
     private struct PowerUp
     {
-        public ITemporaryPowerUp payload;
+        public TemporaryPowerUp payload;
         public Sprite icon;
 
-        public PowerUp(ITemporaryPowerUp payload, Sprite icon)
+        public PowerUp(TemporaryPowerUp payload, Sprite icon)
         {
             this.payload = payload;
             this.icon = icon;
@@ -56,7 +56,7 @@ public class TemporaryPowerUpController : MonoBehaviour
     
     
     
-    public bool AddPowerUp(ITemporaryPowerUp payload, Sprite powerUpIcon)
+    public bool AddPowerUp(TemporaryPowerUp payload, Sprite powerUpIcon)
     {
         var powerUp = new PowerUp(payload, powerUpIcon);
         
@@ -79,12 +79,23 @@ public class TemporaryPowerUpController : MonoBehaviour
         }
     }
 
+    public void ResetFifo()
+    {
+        StopAllCoroutines();
+        foreach (var powerUp in powerUps)
+        {
+            powerUp.payload.OnDetach(player);
+        }
+        powerUps.Clear();
+        UpdateUI();
+    }
+    
     private IEnumerator ActivateNextPowerUp()
     {
         var powerUp = powerUps.Peek();
         UpdateUI();
         powerUp.payload.OnAttach(player);
-        yield return new WaitForSeconds(powerUp.payload.Duration());
+        yield return new WaitForSeconds(powerUp.payload.Duration);
         powerUp.payload.OnDetach(player);
         powerUps.Dequeue();
         UpdateUI();

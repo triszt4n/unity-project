@@ -1,30 +1,19 @@
 ﻿namespace PowerUps
 {
-    public class ShieldPowerUpPayload : ITemporaryPowerUp
+    public class ShieldPowerUpPayload : TemporaryPowerUp
     {
-
-        private float duration;
-
-        public ShieldPowerUpPayload(float duration)
+        public ShieldPowerUpPayload(float duration) : base(duration)
         {
-            this.duration = duration;
         }
 
-        public void OnAttach(PlayerController player)
+        protected override void onAttach(PlayerController player)
         {
             player.hasShield = true;
         }
 
-        public void OnDetach(PlayerController player)
+        protected override void onDetach(PlayerController player)
         {
             player.hasShield = false;
         }
-        
-
-        public float Duration()
-        {
-            return duration;
-        }
-        
     }
 }

@@ -1,33 +1,23 @@
 ﻿namespace PowerUps
 {
-    public class SuperModePowerUpPayload: ITemporaryPowerUp
+    public class SuperModePowerUpPayload : TemporaryPowerUp
     {
-
-        private float duration;
         private float moveMultiplier;
 
-        public SuperModePowerUpPayload(float duration, float moveMultiplier)
+        public SuperModePowerUpPayload(float duration, float moveMultiplier) : base(duration)
         {
-            this.duration = duration;
             this.moveMultiplier = moveMultiplier;
         }
-    
 
-        public void OnAttach(PlayerController player)
+
+        protected override void onAttach(PlayerController player)
         {
-            player.hasShield = true;
             player.moveSpeed *= moveMultiplier;
         }
 
-        public void OnDetach(PlayerController player)
+        protected override void onDetach(PlayerController player)
         {
-            player.hasShield = false;
             player.moveSpeed /= moveMultiplier;
-        }
-
-        public float Duration()
-        {
-            return duration;
         }
     }
 }

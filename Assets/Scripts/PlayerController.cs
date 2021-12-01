@@ -198,6 +198,7 @@ public class PlayerController : MonoBehaviour
 
     public void ContinueGame()
     {
+        GetComponent<TemporaryPowerUpController>()?.ResetFifo();
         Time.timeScale = 1;
         scoreController.HalfScore();
         health = maxHealth;
