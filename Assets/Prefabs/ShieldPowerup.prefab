@@ -129,5 +129,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupSound: {fileID: 8300000, guid: b1b9c1f0ea1fcae439ed1a4d44ff05fd, type: 3}
-  shieldDuration: 5
+  pickupSoundVolume: 1
+  shieldDuration: 10
   icon: {fileID: -7415331047110381915, guid: 6c1bba5b8b56494459b3fcf0447ad5a5, type: 3}

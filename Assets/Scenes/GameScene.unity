@@ -1251,7 +1251,7 @@ MonoBehaviour:
   difficultyController: {fileID: 306001011}
   spawnTimeSpanStart: 2
   spawnTimeSpanEnd: 5
-  aliveTimeEasyMillis: 15000
+  aliveTimeEasyMillis: 20000
 --- !u!82 &306001013
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2083,7 +2083,7 @@ MonoBehaviour:
   millisBetweenShots: 200
   zoomSpeed: 10
   minOrtho: 5
-  maxOrtho: 18
+  maxOrtho: 20
 --- !u!61 &661401322
 BoxCollider2D:
   m_ObjectHideFlags: 0

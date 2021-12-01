@@ -129,7 +129,7 @@ namespace Enemy
                     spawnChances[EnemyType.Walker] = spawnChancesEasy[EnemyType.Walker] * 2;
                     spawnChances[EnemyType.Dodger] = spawnChancesEasy[EnemyType.Dodger] * 200;
                     spawnChances[EnemyType.Bumper] = spawnChancesEasy[EnemyType.Bumper];
-                    spawnChances[EnemyType.Shielded] = spawnChancesEasy[EnemyType.Shielded] * 5;
+                    spawnChances[EnemyType.Shielded] = spawnChancesEasy[EnemyType.Shielded] * 2;
                     break;
                 }
                 default:
