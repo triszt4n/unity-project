@@ -1251,7 +1251,7 @@ MonoBehaviour:
   difficultyController: {fileID: 306001011}
   spawnTimeSpanStart: 2
   spawnTimeSpanEnd: 5
-  aliveTimeEasyMillis: 60000
+  aliveTimeEasyMillis: 15000
 --- !u!82 &306001013
 AudioSource:
   m_ObjectHideFlags: 0
