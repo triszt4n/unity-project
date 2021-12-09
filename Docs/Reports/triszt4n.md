@@ -43,20 +43,14 @@ Csapatunk (Bucsy Benjámin, Kovács Bertalan, Piller Trisztán, Törő Anna Nina
 
 Október elején közösen megterveztük a játék alapjait (játéktér, célok és első ticketek). Majd utána november és december során leginkább úgy haladtunk tovább a ticketekkel, hogy szerveztünk közös kódolásos napokat, amikor összeültünk, és legtöbbször a pair programming módszerével fejlesztettünk (egyik fél kódol, másik felügyel és kutat megoldások iránt, esetleg tesztel).
 
+Konkrét felelősség szétosztása nem volt, leginkább agilitásra törekedtünk, aki ötlettel rendelkezett, hibát vélt felfedezni, akkor pusholt egy issue-t a repository-ba, és legtöbbször vagy a közös alkalmakon, vagy önállóan kiválasztotta magának egy-egy személy, hogy azt meg is oldja (önmagát assign-olta az issue-ra), pull requestet csinált rá, ami a többie általi code review-t követően került be. A masterbe pusholást hanyagoltuk. Így történtek meg a bugfixek, refaktorok és a finomhangolások.
+
 ### Piller Trisztán - az én részem a fejlesztésben
 
-November:
-
 - 🤝 **Közös alkalom #1:** Tervezés: alapok, prefabok megállapítása, 2D tér és elemeinek működésének felvázolása papíron magunknak
-- ✔️ Fix: Build workflow javítása a Github Actionökből.
 - ✔️ Refactor: Konstans sebességűre változtattam a játékos űrhajójának mozgatását.
-- ❌ Feature: Volt egy pull requestem a főmenü UI-jának kialakításával, azonban nem került be, mert szükségtelenül húztam be egy újabb UI framework-öt a már használatban lévő TextMesh Pro mellé.
-- ✔️ Feature: háttér a játéktérnek, majd később ezt újradolgoztam és parallaxot is tettem a háttérre.
-- ✔️ Feature: Implementáltam egy újabb scene-t a scoreboardnak.
-- ✔️ Feature: Kamerarezgés implementálása a robbanásoknál
-- 🤝 **Közös alkalom #2:** Quality of life és utolsó funkcionalitások: kilépési gomb in-game, meghalás logika, timeout a boostok létezésére, hangeffektek
-
-December:
-
+- ✔️ Feature: Törő Anna Ninával hátteret adtunk a játéknak, majd később ezt újradolgoztuk és parallaxot is tettünk a háttérre.
+- ✔️ Feature: Scoreboard UI-jának és scene-jének implementálása.
+- 🤝 **Közös alkalom #2:** Quality of life és utolsó funkcionalitások: kamerarezgés implementálása a robbanásoknál, kilépési gomb in-game, meghalás logika, timeout a boostok létezésére, hangeffektek
 - 🤝 **Közös alkalom #3:** Simítások: egyes elemek felnagyítása, UI elemek fixálása jobb helyekre, hangeffektusok finomhangolása, colliderek igazítása, zoom-olás, egyedi kurzorikon
 - 🤝 **Közös alkalom #4:** Utolsó simítások: tesztelés, balanszolás, apró effektek, assetek (sprite-ok) cseréje
