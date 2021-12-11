@@ -36,7 +36,7 @@ Konkrét felelősség szétosztása nem volt, leginkább agilitásra törekedtü
 
 ### Az én részem a fejlesztésben
 
-- Autómatikus projektfordítás megoldása Github Actions-el. Erre a találtam a GameCI-t, és egy cikket, amiben megoldják, hogy rögtön Github Pages-re ki legyen rakva a lefordított webgl projekt.
+- Automatikus projektfordítás megoldása Github Actions-zel. Erre a találtam a GameCI-t, és egy cikket, amiben megoldják, hogy rögtön Github Pages-re ki legyen rakva a lefordított webgl projekt.
 - A játékos mozgatásának és kamera követésének első verziója, itt még erőhatásokkal mozgattuk a hajót és csak billentyűzetről lehetett vezérelni. Később módosítva lett.
 - Életcsík felrakása a UI-ra és élet adó powerup prefabjának elkészítése.
 - Powerup-ok implementálása a közösen kidolgozott OO modell alapján.

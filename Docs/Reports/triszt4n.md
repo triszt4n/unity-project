@@ -45,12 +45,25 @@ Október elején közösen megterveztük a játék alapjait (játéktér, célok
 
 Konkrét felelősség szétosztása nem volt, leginkább agilitásra törekedtünk, aki ötlettel rendelkezett, hibát vélt felfedezni, akkor pusholt egy issue-t a repository-ba, és legtöbbször vagy a közös alkalmakon, vagy önállóan kiválasztotta magának egy-egy személy, hogy azt meg is oldja (önmagát assign-olta az issue-ra), pull requestet csinált rá, ami a többie általi code review-t követően került be. A masterbe pusholást hanyagoltuk. Így történtek meg a bugfixek, refaktorok és a finomhangolások.
 
+### Közös alkalmak
+
+- **Közös alkalom #1:** Tervezés: alapok, prefabok megállapítása, 2D tér és elemeinek működésének felvázolása papíron magunknak
+- **Közös alkalom #2:** Quality of life és utolsó funkcionalitások: kamerarezgés implementálása a robbanásoknál, kilépési gomb in-game, meghalás logika, timeout a boostok létezésére, hangeffektek
+- **Közös alkalom #3:** Simítások: egyes elemek felnagyítása, UI elemek fixálása jobb helyekre, hangeffektusok finomhangolása, colliderek igazítása, zoom-olás, egyedi kurzorikon
+- **Közös alkalom #4:** Utolsó simítások: tesztelés, balanszolás, apró effektek, assetek (sprite-ok) cseréje
+
 ### Piller Trisztán - az én részem a fejlesztésben
 
-- 🤝 **Közös alkalom #1:** Tervezés: alapok, prefabok megállapítása, 2D tér és elemeinek működésének felvázolása papíron magunknak
-- ✔️ Refactor: Konstans sebességűre változtattam a játékos űrhajójának mozgatását.
-- ✔️ Feature: Törő Anna Ninával hátteret adtunk a játéknak, majd később ezt újradolgoztuk és parallaxot is tettünk a háttérre.
-- ✔️ Feature: Scoreboard UI-jának és scene-jének implementálása.
-- 🤝 **Közös alkalom #2:** Quality of life és utolsó funkcionalitások: kamerarezgés implementálása a robbanásoknál, kilépési gomb in-game, meghalás logika, timeout a boostok létezésére, hangeffektek
-- 🤝 **Közös alkalom #3:** Simítások: egyes elemek felnagyítása, UI elemek fixálása jobb helyekre, hangeffektusok finomhangolása, colliderek igazítása, zoom-olás, egyedi kurzorikon
-- 🤝 **Közös alkalom #4:** Utolsó simítások: tesztelés, balanszolás, apró effektek, assetek (sprite-ok) cseréje
+- *Feature*: A főmenüre UI Toolkittel terveztem és készítettem felhasználói felületet, azonban későn vettem észre, hogy szükségtelen lett volna újabb UI framework-öt beimportálni, hiszen már a TextMesh Pro korábban be lett erre importálva, így nem került mergelésre ezen pull requestem.
+- *Feature*: Scoreboard UI-jának és scene-jének implementálása.
+- *Feature*: Kamerarezgések robbanásokra és ütközésekre.
+- *Feature*: Háttér kijavítása és parallax effektus ráillesztése a háttérre.
+- *Apró feature*: Zoomolás az egérgörgővel.
+- *Apró refactorok, bugfixek*:
+  - Konstans sebességűre változtattam a játékos űrhajójának mozgatását.
+  - GameScene nem buildelődött a Github Action-ös build során, ezt oldottam meg.
+  - A folyamatos egérkattintás folyamatos lövést eredményezzen.
+  - Kilépés gomb jobb alsó sarokba játékmenet közben.
+  - Használatlan gameobjectek törlése a scenekről.
+  - Háttérzene ráillesztése a főmenüre.
+  - Balanszolások (pl.: nagyobb élethossz a powerup-oknak a játékban maradáshoz)
