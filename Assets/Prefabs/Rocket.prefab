@@ -29,13 +29,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5190868816423044133}
-  m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.55, y: -0.41, z: 0}
-  m_LocalScale: {x: 1.5, y: 2, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5190868816443928653
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_Sprite: {fileID: 21300012, guid: 8d18f6d2b73e89b4882fbf3bb5aedb4b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
@@ -116,7 +116,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -131,14 +131,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.10305312, y: 0.18958005}
-      - {x: -0.14999999, y: 0.17}
-      - {x: -0.14999999, y: 0.032996487}
-      - {x: -0.028422073, y: -0.18610673}
-      - {x: 0.03, y: -0.18437006}
-      - {x: 0.14999999, y: 0.03988629}
-      - {x: 0.14999999, y: 0.17}
-      - {x: 0.12147552, y: 0.18784335}
+    - - {x: -0.032616332, y: 0.19999999}
+      - {x: -0.14861812, y: -0.04418649}
+      - {x: -0.14309093, y: -0.1851677}
+      - {x: 0.001455266, y: -0.19861811}
+      - {x: 0.14469332, y: -0.1875634}
+      - {x: 0.1444725, y: -0.03723631}
+      - {x: 0.12789032, y: 0.004178196}
+      - {x: 0.034979492, y: 0.19999999}
 --- !u!114 &2512929588187535134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,8 +152,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 516489693114719762, guid: 65021aff471306440912c2e3a96bc76e, type: 3}
-  speed: 10
-  radius: 4
+  accelerationFactor: 10
+  explosionRadius: 20
+  maxSpeed: 60
 --- !u!50 &1458495034707836661
 Rigidbody2D:
   serializedVersion: 4
@@ -162,13 +163,13 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5190868816423044133}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0

@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public Camera mainCamera;
     public Transform rightFirePoint;
     public Transform leftFirePoint;
+    public Transform centerFirePoint;
     public GameObject bulletPrefab;
     public GameObject explosionPrefab;
     public GameObject rocketPrefab;
@@ -86,6 +87,9 @@ public class PlayerController : MonoBehaviour
         {
             shootStarted = false;
         }
+        
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+            DeployRocket();
 
         ShootIfStarted();
     }
@@ -138,12 +142,12 @@ public class PlayerController : MonoBehaviour
         shootSource.Play();
     }
 
-    private GameObject rocketInstance;
+    private GameObject rocketInstance = null;
+    
     private void DeployRocket()
     {
-        var liftVector = new Vector3(0, 0, 0.1f);
         if (rocketInstance != null) return;
-        rocketInstance = Instantiate(rocketPrefab, leftFirePoint.position + liftVector, leftFirePoint.rotation);
+        rocketInstance = Instantiate(rocketPrefab, centerFirePoint.position, centerFirePoint.rotation);
     }
 
     private void UpdateHealthUI()

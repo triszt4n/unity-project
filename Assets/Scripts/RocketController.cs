@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Enemy;
@@ -7,38 +8,52 @@ using UnityEngine;
 public class RocketController : MonoBehaviour
 {
     public GameObject explosionPrefab;
-    
-    public float speed = 20f;
-    public float radius = 4;
+    private Rigidbody2D rigidBody;
 
-    // Update is called once per frame
-    void Update()
+    public float accelerationFactor = 10f;
+    public float explosionRadius = 5f;
+    public float maxSpeed = 15f;
+
+    private void Start()
     {
-        transform.Translate(Vector3.up * speed * Time.deltaTime);
+        rigidBody = gameObject.GetComponent<Rigidbody2D>();
+        rigidBody.gravityScale = 0;
+    }
+
+    void FixedUpdate()
+    {
+        rigidBody.AddForce(transform.up * accelerationFactor, ForceMode2D.Force);
+
+        if (rigidBody.velocity.magnitude > maxSpeed)
+        {
+            rigidBody.velocity = rigidBody.velocity.normalized * maxSpeed;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (!other.gameObject.CompareTag("Enemy") && !other.gameObject.CompareTag("Wall")) return;
+        Explode();
+        Destroy(gameObject);
     }
     
-    private void Explode(Vector3 explosionPos, float explosionRadius)
+    private void Explode()
     {
+        var explosionPosition = transform.position;
+        
         CameraShaker.Instance.ShakeOnce(4.0f, 4.0f, 0.1f, 1.0f);
-        Instantiate(explosionPrefab, explosionPos, explosionPrefab.transform.rotation);
+        Instantiate(explosionPrefab, explosionPosition, explosionPrefab.transform.rotation);
         
-        var colliders = Physics2D.OverlapCircleAll(explosionPos, explosionRadius);
+        var colliders = Physics2D.OverlapCircleAll(explosionPosition, explosionRadius);
         
-        foreach (var collider in colliders)
+        foreach (var c in colliders)
         {
-            var enemyController = collider.gameObject.GetComponent<AbstractEnemy>();
+            var enemyController = c.gameObject.GetComponent<AbstractEnemy>();
             
-            if (collider.gameObject.CompareTag("Enemy") && enemyController != null)
+            if (c.gameObject.CompareTag("Enemy") && enemyController != null)
             {
                 enemyController.InitiateDestroy();
             }
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (!other.gameObject.CompareTag("Player") || !other.gameObject.CompareTag("Wall")) return;
-        Explode(transform.position, radius);
-        Destroy(gameObject);
     }
 }
