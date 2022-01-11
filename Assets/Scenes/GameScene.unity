@@ -1144,7 +1144,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 661401320}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &306001007
 GameObject:
@@ -1570,7 +1570,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 661401320}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &526777545
 GameObject:
@@ -2047,6 +2047,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1233445258}
   - {fileID: 297968355}
   - {fileID: 460051559}
   - {fileID: 4263149607994940}
@@ -2068,8 +2069,10 @@ MonoBehaviour:
   mainCamera: {fileID: 2102875609}
   rightFirePoint: {fileID: 297968355}
   leftFirePoint: {fileID: 460051559}
+  centerFirePoint: {fileID: 1233445258}
   bulletPrefab: {fileID: 5262704744312587917, guid: c78e03904a9d4e846bb902cc2319eb16, type: 3}
   explosionPrefab: {fileID: 516489693114719762, guid: 98d379976d0200247be695a72880e69b, type: 3}
+  rocketPrefab: {fileID: 5190868816423044133, guid: e099eed639286cc41bb445a778b13c36, type: 3}
   hpBar: {fileID: 1028114326}
   scoreController: {fileID: 306001009}
   deathMenuController: {fileID: 1423148483}
@@ -3049,6 +3052,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1233445257
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1233445258}
+  m_Layer: 0
+  m_Name: CenterFirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1233445258
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233445257}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 661401320}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1250071131
 GameObject:
@@ -5266,7 +5299,7 @@ Transform:
   m_Children:
   - {fileID: 809671128}
   m_Father: {fileID: 661401320}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4491887974802314
 Transform:

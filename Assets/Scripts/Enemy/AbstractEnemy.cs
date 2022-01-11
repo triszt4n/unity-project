@@ -21,8 +21,6 @@ namespace Enemy
         {
             if (!other.gameObject.CompareTag("Projectile")) return;
 
-
-           
             scoreController.AddScore(worthIfShot);
             Destroy(other.gameObject);
             InitiateDestroy(true);
