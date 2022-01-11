@@ -2070,6 +2070,7 @@ MonoBehaviour:
   leftFirePoint: {fileID: 460051559}
   bulletPrefab: {fileID: 5262704744312587917, guid: c78e03904a9d4e846bb902cc2319eb16, type: 3}
   explosionPrefab: {fileID: 516489693114719762, guid: 98d379976d0200247be695a72880e69b, type: 3}
+  rocketPrefab: {fileID: 5190868816423044133, guid: e099eed639286cc41bb445a778b13c36, type: 3}
   hpBar: {fileID: 1028114326}
   scoreController: {fileID: 306001009}
   deathMenuController: {fileID: 1423148483}

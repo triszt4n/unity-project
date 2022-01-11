@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public Transform leftFirePoint;
     public GameObject bulletPrefab;
     public GameObject explosionPrefab;
+    public GameObject rocketPrefab;
     public HealthBar hpBar;
     public ScoreController scoreController;
     public DeathMenuController deathMenuController;
@@ -135,6 +136,14 @@ public class PlayerController : MonoBehaviour
         Instantiate(bulletPrefab, leftFirePoint.position + liftVector, leftFirePoint.rotation);
         Instantiate(bulletPrefab, rightFirePoint.position + liftVector, rightFirePoint.rotation);
         shootSource.Play();
+    }
+
+    private GameObject rocketInstance;
+    private void DeployRocket()
+    {
+        var liftVector = new Vector3(0, 0, 0.1f);
+        if (rocketInstance != null) return;
+        rocketInstance = Instantiate(rocketPrefab, leftFirePoint.position + liftVector, leftFirePoint.rotation);
     }
 
     private void UpdateHealthUI()
