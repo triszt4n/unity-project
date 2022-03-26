@@ -23,7 +23,7 @@ jobs:
           lfs: true
 
       - name: Cache Library
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: Library
           key: Library-${{ github.sha }}
