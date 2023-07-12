@@ -38,7 +38,7 @@ jobs:
           versioning: Semantic
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.7
+        uses: JamesIves/github-pages-deploy-action@v4.4.3
         with:
           branch: gh-pages
           folder: build/WebGL/WebGL
